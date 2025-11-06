@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Med-Lernplan WS 25/26 (V4 - Cloud Sync)</title>
+    <title>Dein Med-Lernplan WS 25/26 (V7 - Self-Host Fix)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -35,8 +35,13 @@
         <header class="mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V4)</h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit Cloud-Synchronisierung.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V6)</h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit Weihnachtspause & neuen Ana-Blöcken.</p>
+                </div>
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V6)</h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit Weihnachtspause & neuen Ana-Blöcken.</p>
                 </div>
                 <div class="text-right">
                     <span id="auth-status" class="text-sm text-gray-500">Initialisiere...</span>
@@ -71,14 +76,14 @@
 
             <!-- Phase 2: Der Große Dauerlauf -->
             <section class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 2: Der große Dauerlauf (08.11. - 19.12.2025)</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 2: Der große Dauerlauf (08.11. - 20.12.2025)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Ziele</h3>
                         <ul class="space-y-3">
-                            <li class="p-4 bg-red-50 rounded-lg text-red-800 font-medium"><strong>Dauerlauf:</strong> Anatomie (Ziel: 20.01.)</li>
-                            <li class="p-4 bg-orange-50 rounded-lg text-orange-800 font-medium"><strong>NEU: Dauerlauf</strong> AC-Selbststudium (Ziel: 07.02.)</li>
-                             <li class="p-4 bg-blue-50 rounded-lg text-blue-800"><strong>Dauerlauf:</strong> Wöchentliche Physio-Tests</li>
+                            <li class="p-4 bg-red-50 rounded-lg text-red-800 font-medium"><strong>Ana-Blöcke 1-3</strong> (Rumpf, Arm, Bein)</li>
+                            <li class="p-4 bg-orange-50 rounded-lg text-orange-800 font-medium"><strong>Dauerlauf</strong> AC-Selbststudium</li>
+                            <li class="p-4 bg-blue-50 rounded-lg text-blue-800"><strong>Dauerlauf:</strong> Wöchentliche Physio-Tests</li>
                             <li class="p-4 bg-blue-100 rounded-lg text-blue-900 border border-blue-300">
                                 <strong>Physio-Ziel:</strong> 26 Punkte (min.)<br>
                                 <strong>Status:</strong> 11/26<br>
@@ -91,17 +96,19 @@
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
                         <ul class="space-y-2 task-list" id="phase2-tasks">
-                            <li class="task-item"><input type="checkbox" id="task2-1"><label for="task2-1" class="ml-2">Wöchentlich 2-3 Blöcke Makro-Anatomie lernen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-2"><label for="task2-2" class="ml-2">Kurs Mikroskop. Anatomie (Di.) vor/nachbereiten</label></li>
+                            <li class="task-item"><input type="checkbox" id="task2-ana-1"><label for="task2-ana-1" class="ml-2 font-semibold text-red-700">Ana-Block 1: Rumpfwand & Rücken (bis ca. 22.11.)</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-3"><label for="task2-3" class="ml-2">Wöchentlich 1-2 feste Blöcke für AC-Selbststudium einplanen</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-4"><label for="task2-4" class="ml-2">Physio Test (14.11.): Blut II (Hämostase, Immunologie)</label></li>
                             <li class="task-item"><input type="checkbox" id="task-vacation" disabled><label for="task-vacation" class="ml-2 text-teal-700 font-medium">Blocker: URLAUB (19.11. - 21.11.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-5"><label for="task2-5" class="ml-2">Nachholen (nach 21.11.): Physio-Stoff "Energiehaushalt" (Test verpasst)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task2-5"><label for="task2-5" class="ml-2">Nachholen (nach 21.11.): Physio-Stoff "Energiehaushalt"</label></li>
+                            <li class="task-item"><input type="checkbox" id="task2-ana-2"><label for="task2-ana-2" class="ml-2 font-semibold text-red-700">Ana-Block 2: Obere Extremität (bis ca. 06.12.)</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-6"><label for="task2-6" class="ml-2">Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-7"><label for="task2-7" class="ml-2">Physio Test (28.11.): Atmung I</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-8"><label for="task2-8" class="ml-2">Physio Test (05.12.): Atmung II</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-9"><label for="task2-9" class="ml-2">Physio Test (12.12.): Niere I</label></li>
+                            <li class="task-item"><input type="checkbox" id="task2-ana-3"><label for="task2-ana-3" class="ml-2 font-semibold text-red-700">Ana-Block 3: Untere Extremität (bis ca. 20.12.)</label></li>
                             <li class="task-item"><input type="checkbox" id="task2-10"><label for="task2-10" class="ml-2">Physio Test (19.12.): Elektrolyt-/Säure-Basen</label></li>
+                            <li class="task-item"><input type="checkbox" id="task2-histo"><label for="task2-histo" class="ml-2">Histo: Themen parallel zu Makro-Blöcken lernen</label></li>
                         </ul>
                     </div>
                 </div>
@@ -109,23 +116,28 @@
 
             <!-- Phase 3: Fokus Anatomie & Biochemie -->
             <section class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 3: Fokus Anatomie & Biochemie (20.12.2025 - 20.01.2026)</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 3: Ana-Endspurt & Biochemie (21.12.2025 - 20.01.2026)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Hauptziele</h3>
                          <ul class="space-y-3">
-                            <li class="p-4 bg-red-50 rounded-lg text-red-800 font-medium"><strong>Ganzkörpertestat (Alles!):</strong> 20.01.2026</li>
+                            <li class="p-4 bg-teal-50 rounded-lg text-teal-800 font-medium"><strong>WEIHNACHTSPAUSE:</strong> (21.12. - 26.12.)</li>
+                            <li class="p-4 bg-red-50 rounded-lg text-red-800"><strong>Ana-Blöcke 4-6</strong> (Organe, Kopf/Hals)</li>
                             <li class="p-4 bg-green-50 rounded-lg text-green-800 font-medium"><strong>Start Biochemie Praktikum:</strong> 07.01.2026</li>
+                            <li class="p-4 bg-red-100 rounded-lg text-red-900 font-medium border border-red-300"><strong>FINALE: Ganzkörpertestat:</strong> 20.01.2026</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste (NEU mit Weihnachtspause)</h3>
                         <ul class="space-y-2 task-list" id="phase3-tasks">
-                            <li class="task-item"><input type="checkbox" id="task3-1"><label for="task3-1" class="ml-2">Weihnachtsferien intensiv für Anatomie-Endspurt nutzen</label></li>
+                            <li class="task-item"><input type="checkbox" id="task-xmas" disabled><label for="task-xmas" class="ml-2 text-teal-700 font-medium">Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task3-ana-4"><label for="task3-ana-4" class="ml-2 font-semibold text-red-700">Ana-Block 4: Brustorgane (27.12. - 05.01.)</label></li>
                             <li class="task-item"><input type="checkbox" id="task3-2"><label for="task3-2" class="ml-2">Vor 07.01.: Überblick Biochemie-Praktikumsthemen</label></li>
                             <li class="task-item"><input type="checkbox" id="task3-3"><label for="task3-3" class="ml-2">Praktikum (ab 07.01.) täglich vor/nachbereiten</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-4"><label for="task3-4" class="ml-2">Finale Wiederholungswoche für Ganzkörpertestat</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-5"><label for="task3-5" class="ml-2">Parallel AC-Selbststudium weiterführen (nicht vergessen!)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task3-ana-5"><label for="task3-ana-5" class="ml-2 font-semibold text-red-700">Ana-Block 5: Bauch- & Beckenorgane (06.01. - 12.01.)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task3-ana-6"><label for="task3-ana-6" class="ml-2 font-semibold text-red-700">Ana-Block 6: Kopf & Hals (13.01. - 18.01.)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task3-ana-7"><label for="task3-ana-7" class="ml-2 font-bold text-red-900">Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)</label></li>
+                            <li class="task-item"><input type="checkbox" id="task3-5"><label for="task3-5" class="ml-2">Parallel AC-Selbststudium weiterführen!</label></li>
                         </ul>
                     </div>
                 </div>
@@ -196,7 +208,7 @@
         // Importiere notwendige Firebase Module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, enableNetwork, disableNetwork } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Globale Variablen ---
         let db;
@@ -210,9 +222,22 @@
 
         // --- Initialisierung ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Firebase Konfiguration aus der Umgebung laden
-            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-study-plan';
+            
+            // --- HIER DEINE FIREBASE KONFIGURATION EINFÜGEN ---
+            // Du erhältst dies, wenn du eine "Web-App" in deinem Firebase-Projekt erstellst (siehe Schritt 2).
+            const firebaseConfig = {
+                apiKey: "DEIN_API_KEY", // Ersetze "DEIN_API_KEY"
+                authDomain: "DEIN_PROJEKT.firebaseapp.com",
+                projectId: "DEIN_PROJEKT_ID",
+                storageBucket: "DEIN_PROJEKT.appspot.com",
+                messagingSenderId: "DEIN_SENDER_ID",
+                appId: "DEIN_APP_ID"
+                // measurementId: "G-..." // Falls vorhanden
+            };
+            
+            // Verwende deine Projekt-ID als App-ID für den Datenbankpfad,
+            // oder eine beliebige eindeutige Zeichenfolge.
+            const appId = firebaseConfig.projectId || 'default-study-plan';
 
             // Firebase initialisieren
             try {
@@ -232,24 +257,23 @@
             handleAuth(appId);
         });
 
-        // --- Authentifizierung ---
-        function handleAuth(appId) {
+        // --- Authentifizierung (VEREINFACHT FÜR SELF-HOSTING) ---
+        async function handleAuth(appId) {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
+                    // User ist bereits angemeldet
                     userId = user.uid;
                 } else {
-                    // Wenn kein User da ist, versuche, sich anzumelden
+                    // Wenn kein User da ist, anonym anmelden
+                    // Dies ist die korrekte Methode für deine GitHub Pages-Version
                     try {
-                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                            await signInWithCustomToken(auth, __initial_auth_token);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
+                        await signInAnonymously(auth);
+                        userId = auth.currentUser?.uid; // ID nach Anmeldung holen
                     } catch (error) {
                         console.error("Authentifizierungsfehler:", error);
-                        statusElement.textContent = "Auth-Fehler";
+                        console.error("--- WICHTIGER HINWEIS: HAST DU DEINE FIREBASE-KONFIGURATION OBEN (Zeile 250) EINGEFÜGT? ---");
+                        statusElement.textContent = "Auth-Fehler (API Key?)";
                     }
-                    userId = auth.currentUser?.uid; // ID nach Anmeldung holen
                 }
 
                 if (userId) {
