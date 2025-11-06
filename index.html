@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Medi-Lernplan WS 25/26 </title>
+    <title>Mein Medi-Lernplan WS 25/26 (V13 - AC-Struktur)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -85,8 +85,8 @@
         <header class="mb-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Mein Medi-Lernplan WS 25/26 </h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan mit AMBOSS-Link.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V13)</h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan mit AC-Struktur & AMBOSS-Link.</p>
                 </div>
                 <div class="text-left md:text-right mt-4 md:mt-0">
                     <span id="current-date" class="text-sm font-semibold text-blue-700">Lade Datum...</span><br>
@@ -273,13 +273,13 @@
         </div>
     </div>
 
-    <!-- Lokales Speicher-Skript (V12 - AMBOSS Link) -->
+    <!-- Lokales Speicher-Skript (V13 - AC-Struktur) -->
     <script type="module">
         
         // --- Globale Variablen ---
         let debounceTimer; // Für verzögertes Speichern
         const statusElement = document.getElementById('save-status');
-        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V12'; // Neuer Key für V12
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V13'; // Neuer Key für V13
         const planContainer = document.getElementById('plan-container');
         const currentDateElement = document.getElementById('current-date');
         const progressBar = document.getElementById('progress-bar');
@@ -301,6 +301,7 @@
         };
 
         // --- Standard-Datenstruktur (Ziele & Aufgaben) ---
+        // *** NEUE AC-STRUKTUR IN V13 ***
         const defaultData = {
             phase1: {
                 goals: [
@@ -310,13 +311,13 @@
                     { id: 'task1-1', text: 'Thema "Blut I" (Zusammensetzung) lernen', checked: false, style: '' },
                     { id: 'task1-2', text: 'Thema "Erythrozyten & Anämien" verstehen', checked: false, style: '' },
                     { id: 'task1-3', text: 'Thema "Blutgruppen" wiederholen', checked: false, style: '' },
-                    { id: 'task1-4', text: 'Plan für AC-Selbststudium erstellen (z.B. 1 Thema/Woche)', checked: false, style: '' }
+                    { id: 'task1-4', text: 'AC-Selbststudium: PDF sichten & Lernplan-Blöcke verstehen', checked: false, style: 'font-semibold text-orange-700' }
                 ]
             },
             phase2: {
                 goals: [
                     { id: 'goal2-1', text: '<strong>Ana-Blöcke 1-3</strong> (Rumpf, Arm, Bein)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
-                    { id: 'goal2-2', text: '<strong>Dauerlauf</strong> AC-Selbststudium', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
+                    { id: 'goal2-new-ac', text: '<strong>Dauerlauf AC-Selbststudium</strong> (Basis: Anorganik.pdf)', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
                     { id: 'goal2-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
                     { id: 'goal2-4', text: '<strong>Physio-Ziel:</strong> 26 Punkte (min.)<br><strong>Status:</strong> 11/26<br><strong>Bedarf:</strong> 15 Punkte aus 6 Tests (Schnitt: 2.5/6)', style: 'p-4 bg-blue-100 rounded-lg text-blue-900 border border-blue-300' },
                     { id: 'goal2-5', text: '<strong>Klausur:</strong> Med. Psychologie (09.12.)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' },
@@ -324,13 +325,14 @@
                 ],
                 tasks: [
                     { id: 'task2-1', text: 'Ana-Block 1: Rumpfwand & Rücken (bis ca. 22.11.)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task2-2', text: 'Wöchentlich 1-2 feste Blöcke für AC-Selbststudium einplanen', checked: false, style: '' },
+                    { id: 'task-ac-1', text: 'AC-Block A: Grundlagen, Formeln, Säure/Base (pdf S. 1-3, 16-22, 44-46)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task2-3', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false, style: '' },
                     { id: 'task-vacation', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
                     { id: 'task2-4', text: 'Nachholen (nach 21.11.): Physio-Stoff "Energiehaushalt"', checked: false, style: '' },
                     { id: 'task2-5', text: 'Ana-Block 2: Obere Extremität (bis ca. 06.12.)', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task2-6', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false, style: '' },
                     { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' },
+                    { id: 'task-ac-2', text: 'AC-Block B: Redox-Reaktionen & Nernst (pdf S. 1, 23-34)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task2-8', text: 'Physio Test (05.12.): Atmung II', checked: false, style: '' },
                     { id: 'task2-9', text: 'Physio Test (12.12.): Niere I', checked: false, style: '' },
                     { id: 'task2-10', text: 'Ana-Block 3: Untere Extremität (bis ca. 20.12.)', checked: false, style: 'font-semibold text-red-700' },
@@ -348,12 +350,13 @@
                 tasks: [
                     { id: 'task-xmas', text: 'Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
                     { id: 'task3-1', text: 'Ana-Block 4: Brustorgane (27.12. - 05.01.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ac-3', text: 'AC-Block C: Thermodynamik & Kinetik (pdf S. 2, 3, 11-15)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task3-2', text: 'Vor 07.01.: Überblick Biochemie-Praktikumsthemen', checked: false, style: '' },
                     { id: 'task3-3', text: 'Praktikum (ab 07.01.) täglich vor/nachbereiten', checked: false, style: '' },
                     { id: 'task3-4', text: 'Ana-Block 5: Bauch- & Beckenorgane (06.01. - 12.01.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ac-4', text: 'AC-Block D: Atomtheorie, PSE, Trends (pdf S. 4-6)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task3-5', text: 'Ana-Block 6: Kopf & Hals (13.01. - 18.01.)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task3-6', text: 'Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)', checked: false, style: 'font-bold text-red-900' },
-                    { id: 'task3-7', text: 'Parallel AC-Selbststudium weiterführen!', checked: false, style: '' }
+                    { id: 'task3-6', text: 'Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)', checked: false, style: 'font-bold text-red-900' }
                 ]
             },
             phase4: {
@@ -361,13 +364,16 @@
                     { id: 'goal4-1', text: '<strong>Biochemie:</strong> 04.02.2026 (9:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
                     { id: 'goal4-2', text: '<strong>Terminologie:</strong> 04.02.2026 (11:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
                     { id: 'goal4-3', text: '<strong>Biologie:</strong> 06.02.2026 (12:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
-                    { id: 'goal4-4', text: '<strong>Chemie (AC):</strong> 07.02.2026 (9:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' }
+                    { id: 'goal4-4', text: '<strong>Chemie (AC):</strong> 07.02.2026 (9:00)', style: 'p-4 bg-orange-100 rounded-lg text-orange-900 border border-orange-300' }
                 ],
                 tasks: [
                     { id: 'task4-1', text: 'Ab 21.01.: Fokus auf Biochemie (Nachbereitung Praktikum) & Termi', checked: false, style: '' },
                     { id: 'task4-2', text: 'Terminologie Vokabeln lernen', checked: false, style: '' },
+                    { id: 'task-ac-5', text: 'AC-Block E: Bindungstypen, Lewis, VSEPR (pdf S. 6-10)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-ac-6', text: 'AC-Block F: Komplexe & Nomenklatur (pdf S. 35-43)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task4-3', text: '04.02. & 05.02.: Fokus auf Biologie für Mediziner', checked: false, style: '' },
-                    { id: 'task4-4', text: '06.02.: Finale Lernphase für AC-Klausur', checked: false, style: '' }
+                    { id: 'task-ac-7', text: 'AC-Block G: Finale Altklausuren & Formeln (pdf S. 1-3)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task4-4', text: '06.02.: AC-Klausurvorbereitung (letzter Tag)', checked: false, style: 'font-bold text-orange-900' }
                 ]
             },
             phase5: {
@@ -691,7 +697,6 @@
                 } else {
                      icon.classList.add('bg-gray-300'); // Grau: Vergangen (aber erledigt)
                     icon.title = "Vergangen";
-
                 }
             });
         }
