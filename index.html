@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Med-Lernplan WS 25/26 (V7 - Self-Host Fix)</title>
+    <title>Dein Med-Lernplan WS 25/26 (V8 - Dynamische Tasks)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -16,6 +16,7 @@
         }
         .task-item label {
             transition: color 0.2s ease-in-out;
+            cursor: pointer;
         }
         /* Kleine Lade-Animation für den Sync-Status */
         #auth-status.syncing::after {
@@ -28,6 +29,16 @@
             60% { content: ' ...'; }
             80%, 100% { content: ' '; }
         }
+        .delete-task-btn {
+            opacity: 0.3;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0 4px;
+        }
+        .task-item:hover .delete-task-btn {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="h-full p-4 md:p-8 bg-gray-100">
@@ -35,13 +46,8 @@
         <header class="mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V6)</h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit Weihnachtspause & neuen Ana-Blöcken.</p>
-                </div>
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V6)</h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit Weihnachtspause & neuen Ana-Blöcken.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V8)</h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit dynamischen Tasks & DB-Sync.</p>
                 </div>
                 <div class="text-right">
                     <span id="auth-status" class="text-sm text-gray-500">Initialisiere...</span>
@@ -64,11 +70,14 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                        <!-- NEU: Form zum Hinzufügen -->
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="new-task-input-phase1" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <button data-phase="phase1" class="add-task-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                        </div>
+                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase1-tasks">
-                            <li class="task-item"><input type="checkbox" id="task1-1"><label for="task1-1" class="ml-2">Thema "Blut I" (Zusammensetzung) lernen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task1-2"><label for="task1-2" class="ml-2">Thema "Erythrozyten & Anämien" verstehen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task1-3"><label for="task1-3" class="ml-2">Thema "Blutgruppen" wiederholen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task1-4"><label for="task1-4" class="ml-2">Plan für AC-Selbststudium erstellen (z.B. 1 Thema/Woche)</label></li>
+                            <!-- JS fügt Tasks hier ein -->
                         </ul>
                     </div>
                 </div>
@@ -95,20 +104,14 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                        <!-- NEU: Form zum Hinzufügen -->
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="new-task-input-phase2" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            <button data-phase="phase2" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                        </div>
+                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase2-tasks">
-                            <li class="task-item"><input type="checkbox" id="task2-ana-1"><label for="task2-ana-1" class="ml-2 font-semibold text-red-700">Ana-Block 1: Rumpfwand & Rücken (bis ca. 22.11.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-3"><label for="task2-3" class="ml-2">Wöchentlich 1-2 feste Blöcke für AC-Selbststudium einplanen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-4"><label for="task2-4" class="ml-2">Physio Test (14.11.): Blut II (Hämostase, Immunologie)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task-vacation" disabled><label for="task-vacation" class="ml-2 text-teal-700 font-medium">Blocker: URLAUB (19.11. - 21.11.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-5"><label for="task2-5" class="ml-2">Nachholen (nach 21.11.): Physio-Stoff "Energiehaushalt"</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-ana-2"><label for="task2-ana-2" class="ml-2 font-semibold text-red-700">Ana-Block 2: Obere Extremität (bis ca. 06.12.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-6"><label for="task2-6" class="ml-2">Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-7"><label for="task2-7" class="ml-2">Physio Test (28.11.): Atmung I</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-8"><label for="task2-8" class="ml-2">Physio Test (05.12.): Atmung II</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-9"><label for="task2-9" class="ml-2">Physio Test (12.12.): Niere I</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-ana-3"><label for="task2-ana-3" class="ml-2 font-semibold text-red-700">Ana-Block 3: Untere Extremität (bis ca. 20.12.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-10"><label for="task2-10" class="ml-2">Physio Test (19.12.): Elektrolyt-/Säure-Basen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task2-histo"><label for="task2-histo" class="ml-2">Histo: Themen parallel zu Makro-Blöcken lernen</label></li>
+                            <!-- JS fügt Tasks hier ein -->
                         </ul>
                     </div>
                 </div>
@@ -129,15 +132,14 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste (NEU mit Weihnachtspause)</h3>
+                        <!-- NEU: Form zum Hinzufügen -->
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="new-task-input-phase3" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            <button data-phase="phase3" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                        </div>
+                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase3-tasks">
-                            <li class="task-item"><input type="checkbox" id="task-xmas" disabled><label for="task-xmas" class="ml-2 text-teal-700 font-medium">Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-ana-4"><label for="task3-ana-4" class="ml-2 font-semibold text-red-700">Ana-Block 4: Brustorgane (27.12. - 05.01.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-2"><label for="task3-2" class="ml-2">Vor 07.01.: Überblick Biochemie-Praktikumsthemen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-3"><label for="task3-3" class="ml-2">Praktikum (ab 07.01.) täglich vor/nachbereiten</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-ana-5"><label for="task3-ana-5" class="ml-2 font-semibold text-red-700">Ana-Block 5: Bauch- & Beckenorgane (06.01. - 12.01.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-ana-6"><label for="task3-ana-6" class="ml-2 font-semibold text-red-700">Ana-Block 6: Kopf & Hals (13.01. - 18.01.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-ana-7"><label for="task3-ana-7" class="ml-2 font-bold text-red-900">Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)</label></li>
-                            <li class="task-item"><input type="checkbox" id="task3-5"><label for="task3-5" class="ml-2">Parallel AC-Selbststudium weiterführen!</label></li>
+                            <!-- JS fügt Tasks hier ein -->
                         </ul>
                     </div>
                 </div>
@@ -166,11 +168,14 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                        <!-- NEU: Form zum Hinzufügen -->
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="new-task-input-phase4" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300">
+                            <button data-phase="phase4" class="add-task-btn bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                        </div>
+                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase4-tasks">
-                            <li class="task-item"><input type="checkbox" id="task4-1"><label for="task4-1" class="ml-2">Ab 21.01.: Fokus auf Biochemie (Nachbereitung Praktikum) & Termi</label></li>
-                            <li class="task-item"><input type="checkbox" id="task4-2"><label for="task4-2" class="ml-2">Terminologie Vokabeln lernen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task4-3"><label for="task4-3" class="ml-2">04.02. & 05.02.: Fokus auf Biologie für Mediziner</label></li>
-                            <li class="task-item"><input type="checkbox" id="task4-4"><label for="task4-4" class="ml-2">06.02.: Finale Lernphase für AC-Klausur</label></li>
+                            <!-- JS fügt Tasks hier ein -->
                         </ul>
                     </div>
                 </div>
@@ -190,11 +195,14 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                        <!-- NEU: Form zum Hinzufügen -->
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="new-task-input-phase5" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            <button data-phase="phase5" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                        </div>
+                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase5-tasks">
-                            <li class="task-item"><input type="checkbox" id="task5-1"><label for="task5-1" class="ml-2">Nach Feb-Klausuren: Pause machen!</label></li>
-                            <li class="task-item"><input type="checkbox" id="task5-2"><label for="task5-2" class="ml-2">Ab Ende Feb.: Physiologie-Stoff der Wochentests reaktivieren</label></li>
-                            <li class="task-item"><input type="checkbox" id="task5-3"><label for="task5-3" class="ml-2">Physiologie-Praktikum (März) intensiv nutzen</label></li>
-                            <li class="task-item"><input type="checkbox" id="task5-4"><label for="task5-4" class="ml-2">Lernplan für OC-Klausur erstellen</label></li>
+                            <!-- JS fügt Tasks hier ein -->
                         </ul>
                     </div>
                 </div>
@@ -207,7 +215,7 @@
     <script type="module">
         // Importiere notwendige Firebase Module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Globale Variablen ---
@@ -215,16 +223,62 @@
         let auth;
         let userId = null;
         let dbRef = null; // Referenz zum Firestore-Dokument
-        let allCheckboxes = [];
         let debounceTimer; // Für verzögertes Speichern
         
         const statusElement = document.getElementById('auth-status');
+        
+        // --- NEU: Standard-Aufgabenstruktur ---
+        // Dies ist der "Fallback", falls nichts in der DB gespeichert ist.
+        let taskState = {
+            phase1: [
+                { id: 'task1-1', text: 'Thema "Blut I" (Zusammensetzung) lernen', checked: false },
+                { id: 'task1-2', text: 'Thema "Erythrozyten & Anämien" verstehen', checked: false },
+                { id: 'task1-3', text: 'Thema "Blutgruppen" wiederholen', checked: false },
+                { id: 'task1-4', text: 'Plan für AC-Selbststudium erstellen (z.B. 1 Thema/Woche)', checked: false }
+            ],
+            phase2: [
+                { id: 'task2-ana-1', text: 'Ana-Block 1: Rumpfwand & Rücken (bis ca. 22.11.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task2-3', text: 'Wöchentlich 1-2 feste Blöcke für AC-Selbststudium einplanen', checked: false },
+                { id: 'task2-4', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false },
+                { id: 'task-vacation', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
+                { id: 'task2-5', text: 'Nachholen (nach 21.11.): Physio-Stoff "Energiehaushalt"', checked: false },
+                { id: 'task2-ana-2', text: 'Ana-Block 2: Obere Extremität (bis ca. 06.12.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task2-6', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false },
+                { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false },
+                { id: 'task2-8', text: 'Physio Test (05.12.): Atmung II', checked: false },
+                { id: 'task2-9', text: 'Physio Test (12.12.): Niere I', checked: false },
+                { id: 'task2-ana-3', text: 'Ana-Block 3: Untere Extremität (bis ca. 20.12.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task2-10', text: 'Physio Test (19.12.): Elektrolyt-/Säure-Basen', checked: false },
+                { id: 'task2-histo', text: 'Histo: Themen parallel zu Makro-Blöcken lernen', checked: false }
+            ],
+            phase3: [
+                { id: 'task-xmas', text: 'Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
+                { id: 'task3-ana-4', text: 'Ana-Block 4: Brustorgane (27.12. - 05.01.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task3-2', text: 'Vor 07.01.: Überblick Biochemie-Praktikumsthemen', checked: false },
+                { id: 'task3-3', text: 'Praktikum (ab 07.01.) täglich vor/nachbereiten', checked: false },
+                { id: 'task3-ana-5', text: 'Ana-Block 5: Bauch- & Beckenorgane (06.01. - 12.01.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task3-ana-6', text: 'Ana-Block 6: Kopf & Hals (13.01. - 18.01.)', checked: false, style: 'font-semibold text-red-700' },
+                { id: 'task3-ana-7', text: 'Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)', checked: false, style: 'font-bold text-red-900' },
+                { id: 'task3-5', text: 'Parallel AC-Selbststudium weiterführen!', checked: false }
+            ],
+            phase4: [
+                { id: 'task4-1', text: 'Ab 21.01.: Fokus auf Biochemie (Nachbereitung Praktikum) & Termi', checked: false },
+                { id: 'task4-2', text: 'Terminologie Vokabeln lernen', checked: false },
+                { id: 'task4-3', text: '04.02. & 05.02.: Fokus auf Biologie für Mediziner', checked: false },
+                { id: 'task4-4', text: '06.02.: Finale Lernphase für AC-Klausur', checked: false }
+            ],
+            phase5: [
+                { id: 'task5-1', text: 'Nach Feb-Klausuren: Pause machen!', checked: false },
+                { id: 'task5-2', text: 'Ab Ende Feb.: Physiologie-Stoff der Wochentests reaktivieren', checked: false },
+                { id: 'task5-3', text: 'Physiologie-Praktikum (März) intensiv nutzen', checked: false },
+                { id: 'task5-4', text: 'Lernplan für OC-Klausur erstellen', checked: false }
+            ]
+        };
 
         // --- Initialisierung ---
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- HIER DEINE FIREBASE KONFIGURATION EINFÜGEN ---
-            // Du erhältst dies, wenn du eine "Web-App" in deinem Firebase-Projekt erstellst (siehe Schritt 2).
             const firebaseConfig = {
                 apiKey: "DEIN_API_KEY", // Ersetze "DEIN_API_KEY"
                 authDomain: "DEIN_PROJEKT.firebaseapp.com",
@@ -232,11 +286,8 @@
                 storageBucket: "DEIN_PROJEKT.appspot.com",
                 messagingSenderId: "DEIN_SENDER_ID",
                 appId: "DEIN_APP_ID"
-                // measurementId: "G-..." // Falls vorhanden
             };
             
-            // Verwende deine Projekt-ID als App-ID für den Datenbankpfad,
-            // oder eine beliebige eindeutige Zeichenfolge.
             const appId = firebaseConfig.projectId || 'default-study-plan';
 
             // Firebase initialisieren
@@ -250,109 +301,186 @@
                 return;
             }
 
-            // Alle Checkboxen einmal sammeln
-            allCheckboxes = Array.from(document.querySelectorAll('.task-list input[type="checkbox"]'));
-
             // Authentifizierung starten
             handleAuth(appId);
+            // NEU: Event-Listener für Buttons und Listen einrichten
+            setupGlobalEventListeners();
         });
 
         // --- Authentifizierung (VEREINFACHT FÜR SELF-HOSTING) ---
         async function handleAuth(appId) {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
-                    // User ist bereits angemeldet
                     userId = user.uid;
                 } else {
-                    // Wenn kein User da ist, anonym anmelden
-                    // Dies ist die korrekte Methode für deine GitHub Pages-Version
                     try {
                         await signInAnonymously(auth);
-                        userId = auth.currentUser?.uid; // ID nach Anmeldung holen
+                        userId = auth.currentUser?.uid;
                     } catch (error) {
                         console.error("Authentifizierungsfehler:", error);
-                        console.error("--- WICHTIGER HINWEIS: HAST DU DEINE FIREBASE-KONFIGURATION OBEN (Zeile 250) EINGEFÜGT? ---");
+                        console.error("--- WICHTIGER HINWEIS: HAST DU DEINE FIREBASE-KONFIGURATION OBEN (Zeile 314) EINGEFÜGT? ---");
                         statusElement.textContent = "Auth-Fehler (API Key?)";
                     }
                 }
 
                 if (userId) {
                     statusElement.textContent = `Verbunden (ID: ${userId.substring(0, 6)}...)`;
-                    // Pfad zum Firestore-Dokument definieren
                     dbRef = doc(db, `artifacts/${appId}/users/${userId}/study-plan`, 'tasks');
-                    
-                    // Daten von Firestore laden UND Event-Listener einrichten
                     loadStateFromFirestore();
-                    setupSaveListeners();
                 } else {
                     console.error("Konnte keine User-ID erhalten.");
                     statusElement.textContent = "Offline. Fortschritt wird nicht gespeichert.";
+                    // Offline arbeiten: Standard-Tasks trotzdem rendern
+                    renderAllPhases();
                 }
             });
+        }
+
+        // --- NEU: Globale Event-Listener (Event Delegation) ---
+        function setupGlobalEventListeners() {
+            // Für "Add Task" Buttons
+            document.querySelectorAll('.add-task-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const phase = btn.dataset.phase;
+                    const input = document.getElementById(`new-task-input-${phase}`);
+                    if (input.value.trim()) {
+                        addTask(phase, input.value.trim());
+                        input.value = ''; // Input-Feld leeren
+                    }
+                });
+            });
+
+            // Für Checkboxen und Löschen-Buttons (Event Delegation)
+            document.querySelectorAll('.task-list').forEach(list => {
+                list.addEventListener('click', (e) => {
+                    const phase = list.id.replace('-tasks', ''); // z.B. "phase1"
+                    
+                    // Checkbox geklickt
+                    if (e.target.matches('input[type="checkbox"]')) {
+                        const taskId = e.target.id;
+                        toggleTask(phase, taskId, e.target.checked);
+                    }
+
+                    // Löschen-Button geklickt
+                    if (e.target.matches('.delete-task-btn')) {
+                        const taskId = e.target.dataset.taskId;
+                        deleteTask(phase, taskId);
+                    }
+                });
+            });
+        }
+
+        // --- NEU: Alle Phasen auf der UI rendern ---
+        function renderAllPhases() {
+            Object.keys(taskState).forEach(phase => {
+                renderPhase(phase);
+            });
+        }
+
+        // --- NEU: Eine einzelne Phase rendern ---
+        function renderPhase(phase) {
+            const listElement = document.getElementById(`${phase}-tasks`);
+            if (!listElement) return; // Sicherheitshalber
+
+            listElement.innerHTML = ''; // Liste leeren
+
+            if (!taskState[phase]) {
+                taskState[phase] = []; // Phase initialisieren, falls sie fehlt
+            }
+
+            taskState[phase].forEach(task => {
+                const li = document.createElement('li');
+                li.className = 'task-item flex justify-between items-center bg-gray-50 p-2 rounded-lg';
+                
+                const labelStyle = task.style || '';
+                const disabled = task.disabled ? 'disabled' : '';
+
+                li.innerHTML = `
+                    <div class="flex-grow">
+                        <input type="checkbox" id="${task.id}" ${task.checked ? 'checked' : ''} ${disabled} class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                        <label for="${task.id}" class="ml-3 ${labelStyle} ${disabled ? 'text-gray-400' : 'text-gray-800'}">
+                            ${task.text}
+                        </label>
+                    </div>
+                    ${!disabled ? `<span data-task-id="${task.id}" class="delete-task-btn text-red-400 hover:text-red-600 font-mono" title="Löschen">X</span>` : ''}
+                `;
+                listElement.appendChild(li);
+            });
+        }
+
+
+        // --- NEU: Logik-Funktionen ---
+        function addTask(phase, text) {
+            const newTask = {
+                id: `task-${Date.now()}`, // Eindeutige ID
+                text: text,
+                checked: false,
+                custom: true // Markieren als benutzerdefiniert
+            };
+            taskState[phase].push(newTask);
+            renderPhase(phase); // UI aktualisieren
+            saveStateToFirestore(); // In DB speichern
+        }
+
+        function toggleTask(phase, taskId, isChecked) {
+            const task = taskState[phase].find(t => t.id === taskId);
+            if (task) {
+                task.checked = isChecked;
+                saveStateToFirestore(); // In DB speichern
+            }
+        }
+
+        function deleteTask(phase, taskId) {
+            taskState[phase] = taskState[phase].filter(t => t.id !== taskId);
+            renderPhase(phase); // UI aktualisieren
+            saveStateToFirestore(); // In DB speichern
         }
 
         // --- Daten von Firestore laden ---
         function loadStateFromFirestore() {
+            if (!dbRef) return;
             statusElement.textContent = "Lade Daten...";
             
-            // onSnapshot hört auf Änderungen in Echtzeit
             onSnapshot(dbRef, (docSnap) => {
                 if (docSnap.exists()) {
-                    const taskData = docSnap.data();
-                    // Checkboxen basierend auf geladenen Daten aktualisieren
-                    allCheckboxes.forEach(checkbox => {
-                        if (taskData[checkbox.id] === true) {
-                            checkbox.checked = true;
-                        } else {
-                            checkbox.checked = false; // Wichtig, um "false" zu setzen
-                        }
-                    });
+                    // Wenn Daten in der DB existieren, überschreibe den Standard-State
+                    taskState = docSnap.data();
                 } else {
-                    // Falls kein Dokument existiert (z.B. erster Besuch)
-                    // wird es beim nächsten Speichern automatisch erstellt.
-                    console.log("Noch kein Dokument vorhanden. Wird bei der ersten Änderung erstellt.");
+                    // Beim allerersten Laden (oder nach DB-Reset)
+                    // taskState behält den vordefinierten Wert
+                    console.log("Keine DB-Daten. Verwende Standard-Tasks.");
+                    // Optional: Standard-Tasks direkt speichern, um DB zu initialisieren
+                    saveStateToFirestore();
                 }
+                renderAllPhases(); // UI mit geladenen oder Standard-Tasks aufbauen
                 statusElement.textContent = `Synchronisiert (ID: ${userId.substring(0, 6)}...)`;
             }, (error) => {
                 console.error("Fehler beim Laden von Firestore:", error);
                 statusElement.textContent = "Sync-Fehler";
-            });
-        }
-
-        // --- Event-Listener für das Speichern einrichten ---
-        function setupSaveListeners() {
-            allCheckboxes.forEach(checkbox => {
-                // Event-Listener hinzufügen, der die Speicherfunktion aufruft
-                checkbox.addEventListener('change', saveStateToFirestore);
+                renderAllPhrases(); // UI trotzdem mit Standard-Tasks aufbauen
             });
         }
 
         // --- Daten in Firestore speichern (mit Debounce) ---
         function saveStateToFirestore() {
-            // "Debouncing": Wartet 1 Sekunde nach der letzten Änderung, bevor gespeichert wird
+            if (!userId || !dbRef) return; // Nicht speichern, wenn nicht verbunden
+
             clearTimeout(debounceTimer);
             statusElement.textContent = "Änderungen erkannt...";
-            statusElement.classList.add('syncing'); // Lade-Animation
+            statusElement.classList.add('syncing');
             
             debounceTimer = setTimeout(async () => {
-                const tasksToSave = {};
-                // Den Status aller Checkboxen sammeln
-                allCheckboxes.forEach(checkbox => {
-                    tasksToSave[checkbox.id] = checkbox.checked;
-                });
-
                 try {
-                    // setDoc mit { merge: false } überschreibt das Dokument komplett
-                    // Das ist hier gewollt, um den exakten Stand der UI abzubilden
-                    await setDoc(dbRef, tasksToSave, { merge: false });
+                    // Speichere das *gesamte* taskState-Objekt
+                    await setDoc(dbRef, taskState, { merge: false });
                     statusElement.textContent = `Synchronisiert (ID: ${userId.substring(0, 6)}...)`;
                 } catch (error) {
                     console.error("Fehler beim Speichern in Firestore:", error);
                     statusElement.textContent = "Speicherfehler!";
                 } finally {
-                    statusElement.classList.remove('syncing'); // Lade-Animation entfernen
+                    statusElement.classList.remove('syncing');
                 }
-            }, 1000); // 1 Sekunde Verzögerung
+            }, 1500); // 1.5 Sekunden Verzögerung
         }
 
     </script>
