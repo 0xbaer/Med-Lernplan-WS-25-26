@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Medi-Lernplan WS 25/26 (V19 - Histo II Topics)</title>
+    <title>Mein Medi-Lernplan WS 25/26 (V20 - Wöchentliche Sprints)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden; /* Verhindert horizontales Scrollen beim Öffnen des Menüs */
+            overflow-x: hidden; 
         }
-        /* Stil für abgehakte Aufgaben */
         .task-item input:checked + label .edit-span {
             text-decoration: line-through;
             color: #6b7280; /* gray-500 */
@@ -19,16 +18,14 @@
         .task-item label, .goal-item .edit-span {
             transition: color 0.2s ease-in-out;
             cursor: pointer;
-            display: inline-block; /* Wichtig für Klickbarkeit */
+            display: inline-block; 
             width: 100%;
         }
-        /* Hover-Effekt für editierbare Texte */
         .goal-item .edit-span:hover, .task-item label .edit-span:hover {
             background-color: #eff6ff; /* blue-50 */
             border-radius: 3px;
             box-shadow: 0 0 0 1px #dbeafe; /* blue-100 */
         }
-        /* Speicher-Animation */
         #save-status.syncing::after {
             content: ' .';
             animation: dots 1s steps(5, end) infinite;
@@ -39,7 +36,6 @@
             60% { content: ' ...'; }
             80%, 100% { content: ' '; }
         }
-        /* Löschen-Button (rotes X) */
         .delete-btn {
             opacity: 0.3;
             transition: opacity 0.2s;
@@ -50,7 +46,6 @@
             color: #ef4444; /* red-500 */
             align-self: flex-start;
         }
-        /* "Lernen"-Button (Buch) */
         .learn-btn {
             opacity: 0.3;
             transition: opacity 0.2s;
@@ -62,7 +57,6 @@
         .task-item:hover .learn-btn, .goal-item:hover .learn-btn {
             opacity: 1;
         }
-        /* Eingabefeld, das beim Editieren erscheint */
         .editing-input {
             width: 95%;
             padding: 2px 4px;
@@ -79,7 +73,6 @@
             margin-right: 10px;
             vertical-align: middle;
         }
-        /* --- NEU V17: Slide-Over Menü --- */
         #resource-menu {
             transition: transform 0.3s ease-in-out;
         }
@@ -93,11 +86,10 @@
 </head>
 <body class="h-full p-4 md:p-8 bg-gray-100">
 
-    <!-- NEU V17: Overlay für Menü -->
+    <!-- Overlay für Menü -->
     <div id="menu-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden"></div>
 
-    <!-- NEU V17: Ressourcen-Menü (Slide-Over) -->
-    <!-- HINWEIS V18: Links für Anatomie & Histo Skripte hinzugefügt -->
+    <!-- Ressourcen-Menü (Slide-Over) -->
     <div id="resource-menu" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-40 p-6 menu-hidden overflow-y-auto">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-900">Ressourcen</h2>
@@ -105,13 +97,10 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        
         <p class="text-sm text-gray-600 mb-4">
             <!-- HINWEIS: Ersetze die 'href' #" Platzhalter unten mit deinen echten Google Drive / Cloud-Links -->
         </p>
-        
         <ul class="space-y-3">
-            <!-- Anatomie Skripte -->
             <li>
                 <a href="#" target="_blank" class="flex items-center p-3 bg-red-50 rounded-lg hover:bg-red-100 text-red-700 font-medium">
                     <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13.5M8.25 6.253l-3 3m3-3l3 3M6.253 18v-3.375c0-1.02.84-1.875 1.875-1.875h7.75c1.035 0 1.875.855 1.875 1.875V18M17.75 6.253l-3 3m3-3l3 3"></path></svg>
@@ -130,14 +119,12 @@
                     Anatomie 3: Kopf, Hals, ZNS
                 </a>
             </li>
-            <!-- Histo Skript -->
             <li>
                 <a href="#" target="_blank" class="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 text-purple-700 font-medium">
                     <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path></svg>
                     Histologie Endspurt
                 </a>
             </li>
-            <!-- Andere Dokumente -->
             <li>
                 <a href="#" target="_blank" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 text-blue-600 font-medium">
                     <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"></path></svg>
@@ -177,8 +164,8 @@
         <header class="mb-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V19)</h1>
-                    <p class="text-lg text-gray-600">Integriert mit Histo II Vorlesungsplan.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V20)</h1>
+                    <p class="text-lg text-gray-600">Wöchentliche Sprints (statt Phasen).</p>
                 </div>
                 <div class="text-left md:text-right mt-4 md:mt-0 flex items-center">
                     <div class="mr-6">
@@ -207,415 +194,195 @@
 
         <!-- Container für die Lernphasen -->
         <div class="space-y-8" id="plan-container">
-
-            <!-- Phase 1: Aktueller Fokus -->
-            <section id="phase1-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-4">
-                    <span id="phase1-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 1: Aktueller Fokus (Bis 07.11.2025)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 1 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase1-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase1-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Ziele</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase1" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            <button data-phase="phase1" data-type="goals" class="add-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-3 goal-list" id="phase1-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase1" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
-                            <button data-phase="phase1" data-type="tasks" class="add-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase1-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- NEU: Phase 2 (November) -->
-            <section id="phase2-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-                    <span id="phase2-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 2: Histo-Catchup & Ana 1 (08.11. - 01.12.2025)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 2 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase2-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase2-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Ziele</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase2" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase2" data-type="goals" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-3 goal-list" id="phase2-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase2" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase2" data-type="tasks" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase2-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- NEU: Phase 3 (Dezember-Klausuren) -->
-            <section id="phase3-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-                    <span id="phase3-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 3: Dezember-Klausuren (02.12. - 20.12.2025)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 3 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase3-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase3-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Hauptziele</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase3" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase3" data-type="goals" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                         <ul class="space-y-3 goal-list" id="phase3-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase3" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase3" data-type="tasks" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase3-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Umnummeriert: Phase 4 (Januar) -->
-            <section id="phase4-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-                    <span id="phase4-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 4: Ana-Endspurt & Biochemie (21.12.2025 - 20.01.2026)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 4 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase4-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase4-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Hauptziele</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase4" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase4" data-type="goals" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                         <ul class="space-y-3 goal-list" id="phase4-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase4" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase4" data-type="tasks" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase4-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Umnummeriert: Phase 5 (Februar-Klausuren) -->
-            <section id="phase5-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-red-700 mb-4">
-                    <span id="phase5-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 5: Februar-Klausuren (21.01. - 07.02.2026)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 5 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase5-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase5-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Alle Klausuren</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase5" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300">
-                            <button data-phase="phase5" data-type="goals" class="add-btn bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-3 goal-list" id="phase5-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase5" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300">
-                            <button data-phase="phase5" data-type="tasks" class="add-btn bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase5-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Umnummeriert: Phase 6 (Langfristig) -->
-            <section id="phase6-section" class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-                    <span id="phase6-status" class="phase-status-icon bg-gray-300" title="Status"></span>
-                    Phase 6: Langfristige Ziele (Frühjahr 2026)
-                </h2>
-                <!-- Individueller Fortschrittsbalken für Phase 6 -->
-                <div class="mt-2 mb-4">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
-                        <span id="phase6-progress-text" class="text-sm font-medium text-gray-700">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div id="phase6-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Ziele (Links) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Zukünftige Prüfungen</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-goal-input-phase6" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase6" data-type="goals" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                         <ul class="space-y-3 goal-list" id="phase6-goals">
-                            <!-- JS fügt Ziele hier ein -->
-                        </ul>
-                    </div>
-                    <!-- Tracking (Rechts) -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <div class="flex gap-2 mb-4">
-                            <input type="text" id="new-task-input-phase6" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <button data-phase="phase6" data-type="tasks" class="add-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
-                        </div>
-                        <ul class="space-y-2 task-list" id="phase6-tasks">
-                            <!-- JS fügt Tasks hier ein -->
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
+            <!-- Alle Phasen-Sektionen werden hier dynamisch von JS eingefügt -->
         </div>
     </div>
 
-    <!-- Lokales Speicher-Skript (V19 - Histo II Topics) -->
+    <!-- Lokales Speicher-Skript (V20 - Wöchentliche Sprints) -->
     <script type="module">
         
         // --- Globale Variablen ---
         let debounceTimer; // Für verzögertes Speichern
         const statusElement = document.getElementById('save-status');
-        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V19'; // Neuer Key für V19
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V20'; // Neuer Key für V20
         const planContainer = document.getElementById('plan-container');
         const currentDateElement = document.getElementById('current-date');
         const globalProgressBar = document.getElementById('progress-bar');
         const globalProgressText = document.getElementById('progress-text');
         
-        // --- NEU V17: Menü-Variablen ---
+        // --- V17: Menü-Variablen ---
         const menu = document.getElementById('resource-menu');
         const overlay = document.getElementById('menu-overlay');
         const openBtn = document.getElementById('open-menu-btn');
         const closeBtn = document.getElementById('close-menu-btn');
 
         // Simuliertes heutiges Datum für Tests (z.B. '2025-11-06T12:00:00')
-        const now = new Date('2025-11-06T12:00:00'); // Test: Phase 1 aktiv
+        const now = new Date('2025-11-06T12:00:00'); // Test: KW 45 aktiv
         // const now = new Date(); // Echtes Datum verwenden
-        // const now = new Date('2025-12-10T12:00:00'); // Test: Phase 3 aktiv
+        // const now = new Date('2025-12-10T12:00:00'); // Test: KW 50 aktiv
         
-        // --- Phasen-Zeit-Metadaten (6-Phasen-Struktur) ---
+        // --- Phasen-Zeit-Metadaten (Wöchentliche Struktur) ---
         const phaseMetadata = {
-            phase1: { startDate: new Date('2025-10-01'), endDate: new Date('2025-11-07T23:59:59') },
-            phase2: { startDate: new Date('2025-11-08'), endDate: new Date('2025-12-01T23:59:59') }, 
-            phase3: { startDate: new Date('2025-12-02'), endDate: new Date('2025-12-20T23:59:59') }, 
-            phase4: { startDate: new Date('2025-12-21'), endDate: new Date('2026-01-20T23:59:59') }, 
-            phase5: { startDate: new Date('2026-01-21'), endDate: new Date('2026-02-07T23:59:59') }, 
-            phase6: { startDate: new Date('2026-02-08'), endDate: new Date('2026-04-30T23:59:59') }
+            kw45: { name: "KW 45: Aktueller Fokus", startDate: new Date('2025-11-03'), endDate: new Date('2025-11-09T23:59:59'), color: "blue" },
+            kw46: { name: "KW 46: Histo-Catchup", startDate: new Date('2025-11-10'), endDate: new Date('2025-11-16T23:59:59'), color: "gray" },
+            kw47: { name: "KW 47: Urlaub & Weibl. Gen. I", startDate: new Date('2025-11-17'), endDate: new Date('2025-11-23T23:59:59'), color: "gray" },
+            kw48: { name: "KW 48: Histo-Catchup II & Psycho-Start", startDate: new Date('2025-11-24'), endDate: new Date('2025-11-30T23:59:59'), color: "gray" },
+            kw49: { name: "KW 49: Histo Niere & Ana 3", startDate: new Date('2025-12-01'), endDate: new Date('2025-12-07T23:59:59'), color: "gray" },
+            kw50: { name: "KW 50: Klausur Med. Psychologie", startDate: new Date('2025-12-08'), endDate: new Date('2025-12-14T23:59:59'), color: "yellow" },
+            kw51: { name: "KW 51: Klausur Histologie II", startDate: new Date('2025-12-15'), endDate: new Date('2025-12-21T23:59:59'), color: "purple" },
+            kw52: { name: "KW 52: Weihnachtspause & Ana 2", startDate: new Date('2025-12-22'), endDate: new Date('2025-12-28T23:59:59'), color: "gray" },
+            kw01: { name: "KW 1 '26: Ana 2 & AC", startDate: new Date('2025-12-29'), endDate: new Date('2026-01-04T23:59:59'), color: "gray" },
+            kw02: { name: "KW 2: Biochemie-Praktikum & Ana 2", startDate: new Date('2026-01-05'), endDate: new Date('2026-01-11T23:59:59'), color: "green" },
+            kw03: { name: "KW 3: Ana 3 & Testat-Vorb.", startDate: new Date('2026-01-12'), endDate: new Date('2026-01-18T23:59:59'), color: "gray" },
+            kw04: { name: "KW 4: Klausur Ganzkörpertestat", startDate: new Date('2026-01-19'), endDate: new Date('2026-01-25T23:59:59'), color: "red" },
+            kw05: { name: "KW 5: Finale AC & BC/Termi", startDate: new Date('2026-01-26'), endDate: new Date('2026-02-01T23:59:59'), color: "gray" },
+            kw06: { name: "KW 6: KLAUSURENWOCHE", startDate: new Date('2026-02-02'), endDate: new Date('2026-02-08T23:59:59'), color: "red" },
+            kw_future: { name: "Langfristige Ziele (Ab KW 7 '26)", startDate: new Date('2026-02-09'), endDate: new Date('2026-04-30T23:59:59'), color: "gray" }
         };
 
-        // --- Standard-Datenstruktur (V19 - 6-Phasen-Struktur mit Histo II Topics) ---
+        // --- Standard-Datenstruktur (V20 - Wöchentlich) ---
         const defaultData = {
-            phase1: { // Bis 07.11.
-                goals: [
-                    { id: 'goal1-1', text: '<strong>Testat:</strong> Wöchentlicher Physio-Test (07.11.)', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' }
-                ],
+            kw45: {
+                goals: [ { id: 'goal-kw45-1', text: '<strong>Physio-Test (07.11.)</strong> bestehen', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' } ],
                 tasks: [
-                    { id: 'task1-1', text: 'Physio-Seminar WS 4: "Blut I" (Zusammensetzung) lernen', checked: false, style: '' },
-                    { id: 'task1-2', text: 'Physio-Seminar WS 4: "Erythrozyten & Anämien" verstehen', checked: false, style: '' },
-                    { id: 'task1-3', text: 'Physio-Seminar WS 4: "Blutgruppen" wiederholen', checked: false, style: '' },
-                    { id: 'task1-4', text: 'AC-Selbststudium: PDF sichten & Lernplan-Blöcke verstehen', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-histo-start', text: 'Histo: Vorlesung 06.11. (Leber II) besuchen/nacharbeiten', checked: false, style: 'font-semibold text-purple-700' }
+                    { id: 'task-kw45-1', text: 'Physio-Seminar WS 4: "Blut I" (alle 3 Themen)', checked: false, style: '' },
+                    { id: 'task-kw45-2', text: 'AC-Selbststudium: PDF sichten & Lernplan-Blöcke verstehen', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-kw45-3', text: 'Histo: Vorlesung 06.11. (Leber II) besuchen/nacharbeiten', checked: false, style: 'font-semibold text-purple-700' }
                 ]
             },
-            phase2: { // 08.11. - 01.12.
-                goals: [
-                    { id: 'goal2-new-histo', text: '<strong>KLAUSUR: Histologie II (16.12.)</strong>', style: 'p-4 bg-purple-100 rounded-lg text-purple-900 border border-purple-300 font-bold' },
-                    { id: 'goal2-5', text: '<strong>Klausur:</strong> Med. Psychologie (09.12.)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' },
-                    { id: 'goal2-1', text: '<strong>Ana 1:</strong> Lerntage 1-2 (Allg./Extrem.)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
-                    { id: 'goal2-new-ac', text: '<strong>Dauerlauf AC-Selbststudium</strong>', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
-                    { id: 'goal2-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
-                    { id: 'goal2-4', text: '<strong>Physio-Ziel:</strong> 15 Pkt. aus 6 Tests (Schnitt: 2.5/6)', style: 'p-4 bg-blue-100 rounded-lg text-blue-900 border border-blue-300' },
-                    { id: 'goal2-6', text: '<strong>Urlaub:</strong> 19.11. - 21.11. (Buenos Aires!)', style: 'p-4 bg-teal-50 rounded-lg text-teal-800' }
-                ],
+            kw46: {
+                goals: [ { id: 'goal-kw46-1', text: '<strong>Physio-Test (14.11.)</strong> bestehen', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
+                         { id: 'goal-kw46-2', text: '<strong>Histo-Notfallplan</strong> starten', style: 'p-4 bg-red-50 rounded-lg text-red-800' } ],
                 tasks: [
-                    { id: 'task-histo-catchup-1', text: 'Histo CATCH-UP: 1. Immunologie & Lymph. Organe (VL 13.10-21.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
-                    { id: 'task-histo-catchup-2', text: 'Histo CATCH-UP: 3. Verdauung (Zähne, Speicheldrüsen, Oesophagus, Magen) (VL 22.10-30.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
-                    { id: 'task-histo-current-1', text: 'Histo: 3. Verdauung (Dünn-/Dickdarm, Leber, Pankreas) (VL 03.11-10.11)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task-histo-current-2', text: 'Histo: 4. Endokrines System (VL 11.11-13.11)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task2-3', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false, style: '' },
-                    { id: 'task-ana-1', text: 'Ana 1 - Lerntag 1: Allg. Ana/Embryo, Obere Extremität (Knochen, Gelenke)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-ac-1', text: 'AC-Block A: Grundlagen, Formeln, Säure/Base (pdf S. 1-3, 16-22, 44-46)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-histo-current-3', text: 'Histo: 5. Weibl. Genitale I (VL 17.11-18.11)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task-vacation', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
-                    { id: 'task-histo-catchup-3', text: 'NACHHOLEN (nach 21.11.): Histo: 5. Weibl. Genitale II (VL 19.11-24.11)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task2-4', text: 'NACHHOLEN (nach 21.11.): Physio-Stoff "Energiehaushalt"', checked: false, style: '' },
-                    { id: 'task2-6', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false, style: 'font-bold text-yellow-800' },
-                    { id: 'task-histo-current-4', text: 'Histo: 6. Männl. Genitale (VL 25.11-01.12)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' },
-                    { id: 'task-ana-2', text: 'Ana 1 - Lerntag 2: Obere Extremität (Muskeln, Leitungsbahnen, Topo)', checked: false, style: 'font-semibold text-red-700' }
+                    { id: 'task-kw46-1', text: 'Histo CATCH-UP: 1. Immunologie & Lymph. Organe (VL 13.10-21.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
+                    { id: 'task-kw46-2', text: 'Histo: 4. Endokrines System (VL 11.11-13.11) besuchen/lernen', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw46-3', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false, style: '' },
+                    { id: 'task-kw46-4', text: 'Ana 1 - Lerntag 1: Allg. Ana/Embryo, Obere Extremität (Knochen, Gelenke)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw46-5', text: 'AC-Block A: Grundlagen, Formeln, Säure/Base (pdf S. 1-3, 16-22, 44-46)', checked: false, style: 'font-semibold text-orange-700' }
                 ]
             },
-            phase3: { // 02.12. - 20.12.
-                goals: [
-                    { id: 'goal3-new-histo', text: '<strong>KLAUSUR: Histologie II (16.12.)</strong>', style: 'p-4 bg-purple-100 rounded-lg text-purple-900 border border-purple-300 font-bold' },
-                    { id: 'goal3-5', text: '<strong>Klausur:</strong> Med. Psychologie (09.12.)', style: 'p-4 bg-yellow-100 rounded-lg text-yellow-900 border border-yellow-300 font-bold' },
-                    { id: 'goal3-1', text: '<strong>Ana 1:</strong> Lerntage 3-4 (Untere Extrem., Rumpf)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
-                    { id: 'goal3-new-ac', text: '<strong>Dauerlauf AC-Selbststudium</strong>', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
-                    { id: 'goal3-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' }
-                ],
+            kw47: {
+                goals: [ { id: 'goal-kw47-1', text: '<strong>Urlaub (19.11. - 21.11.)</strong>', style: 'p-4 bg-teal-50 rounded-lg text-teal-800' } ],
                 tasks: [
-                    { id: 'task-histo-current-5', text: 'Histo: 7. Niere & Abl. Harnwege (VL 02.12-10.12)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task-ac-2', text: 'AC-Block B: Redox-Reaktionen & Nernst (pdf S. 1, 23-34)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task3-8', text: 'Physio Test (05.12.): Atmung II', checked: false, style: '' },
-                    { id: 'task-psycho-final', text: 'FINALE LERNPHASE MED. PSYCHOLOGIE (06.12. - 08.12.)', checked: false, style: 'font-bold text-yellow-800 bg-yellow-50' },
-                    { id: 'task-ana-3', text: 'Ana 1 - Lerntag 3: Untere Extremität (Knochen, Gelenke, Muskeln, Topo)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task3-9', text: 'Physio Test (12.12.): Niere I', checked: false, style: '' },
-                    { id: 'task-histo-final', text: 'FINALE LERNPHASE HISTOLOGIE (Alle Themen wiederholen) (13.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
-                    { id: 'task-ana-4', text: 'Ana 1 - Lerntag 4: Rücken, Brust-, Bauchwand, Beckenboden', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task3-11', text: 'Physio Test (19.12.): Elektrolyt-/Säure-Basen', checked: false, style: '' }
+                    { id: 'task-kw47-1', text: 'Histo: 5. Weibl. Genitale I (VL 17.11-18.11) VOR dem Urlaub lernen!', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw47-2', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' }
                 ]
             },
-            phase4: { // 21.12. - 20.01.
-                goals: [
-                    { id: 'goal4-1', text: '<strong>WEIHNACHTSPAUSE:</strong> (21.12. - 26.12.)', style: 'p-4 bg-teal-50 rounded-lg text-teal-800 font-medium' },
-                    { id: 'goal4-2', text: '<strong>Ana 2:</strong> Pakete 5-8 (Eingeweide)', style: 'p-4 bg-red-50 rounded-lg text-red-800' },
-                    { id: 'goal4-3', text: '<strong>Ana 3:</strong> Pakete 9-12 (Kopf, Hals, ZNS)', style: 'p-4 bg-red-50 rounded-lg text-red-800' },
-                    { id: 'goal4-4', text: '<strong>Start Biochemie Praktikum:</strong> 07.01.2026', style: 'p-4 bg-green-50 rounded-lg text-green-800 font-medium' },
-                    { id: 'goal4-5', text: '<strong>FINALE: Ganzkörpertestat:</strong> 20.01.2026', style: 'p-4 bg-red-100 rounded-lg text-red-900 font-medium border border-red-300' }
-                ],
+            kw48: {
+                goals: [ { id: 'goal-kw48-1', text: '<strong>Psycho-Lernphase</strong> starten', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' },
+                         { id: 'goal-kw48-2', text: '<strong>Physio-Test (28.11.)</strong> bestehen', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' } ],
                 tasks: [
-                    { id: 'task-xmas', text: 'Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
-                    { id: 'task-ana-5', text: 'Ana 2 - Lernpaket 5: Brustsitus (Herz, Lunge, Ösophagus)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-ac-3', text: 'AC-Block C: Thermodynamik & Kinetik (pdf S. 2, 3, 11-15)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-ana-6', text: 'Ana 2 - Lernpaket 6: Bauchsitus (Magen, Darm, Leber, Pankreas)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task4-2', text: 'Vor 07.01.: Überblick Biochemie-Praktikumsthemen', checked: false, style: '' },
-                    { id: 'task4-3', text: 'Praktikum (ab 07.01.) täglich vor/nachbereiten', checked: false, style: '' },
-                    { id: 'task-ana-7', text: 'Ana 2 - Lernpaket 7 & 8: Beckensitus, Geschlechtsorgane, Leitungsbahnen', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-ac-4', text: 'AC-Block D: Atomtheorie, PSE, Trends (pdf S. 4-6)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-ana-9', text: 'Ana 3 - Lernpaket 9 & 10: Kopf & Hals', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-ana-11', text: 'Ana 3 - Lernpaket 11 & 12: ZNS, Sinnesorgane', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-ana-final', text: 'Ana-Block 7: Puffer & Finale Repetition (Ana 1, 2, 3)', checked: false, style: 'font-bold text-red-900' }
+                    { id: 'task-kw48-1', text: 'NACHHOLEN: Physio-Stoff "Energiehaushalt" (von KW 47)', checked: false, style: 'font-semibold text-gray-500' },
+                    { id: 'task-kw48-2', text: 'NACHHOLEN: Histo: 5. Weibl. Genitale II (VL 19.11-24.11)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw48-3', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false, style: 'font-bold text-yellow-800' },
+                    { id: 'task-kw48-4', text: 'Histo: 6. Männl. Genitale (VL 25.11-01.12) besuchen/lernen', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw48-5', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' },
+                    { id: 'task-kw48-6', text: 'Ana 1 - Lerntag 2: Obere Extremität (Muskeln, Leitungsbahnen, Topo)', checked: false, style: 'font-semibold text-red-700' }
                 ]
             },
-            phase5: { // 21.01. - 07.02.
-                goals: [
-                    { id: 'goal5-1', text: '<strong>Biochemie:</strong> 04.02.2026 (9:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
-                    { id: 'goal5-2', text: '<strong>Terminologie:</strong> 04.02.2026 (11:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
-                    { id: 'goal5-3', text: '<strong>Biologie:</strong> 06.02.2026 (12:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
-                    { id: 'goal5-4', text: '<strong>Chemie (AC):</strong> 07.02.2026 (9:00)', style: 'p-4 bg-orange-100 rounded-lg text-orange-900 border border-orange-300' }
-                ],
+            kw49: {
+                goals: [ { id: 'goal-kw49-1', text: '<strong>Physio-Test (05.12.)</strong> bestehen', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' } ],
                 tasks: [
-                    { id: 'task5-1', text: 'Ab 21.01.: Fokus auf Biochemie (Nachbereitung Praktikum) & Termi', checked: false, style: '' },
-                    { id: 'task5-2', text: 'Terminologie Vokabeln lernen', checked: false, style: '' },
-                    { id: 'task-ac-5', text: 'AC-Block E: Bindungstypen, Lewis, VSEPR (pdf S. 6-10)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-ac-6', text: 'AC-Block F: Komplexe & Nomenklatur (pdf S. 35-43)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task5-3', text: '04.02. & 05.02.: Fokus auf Biologie für Mediziner', checked: false, style: '' },
-                    { id: 'task-ac-7', text: 'AC-Block G: Finale Altklausuren & Formeln (pdf S. 1-3)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task5-4', text: '06.02.: AC-Klausurvorbereitung (letzter Tag)', checked: false, style: 'font-bold text-orange-900' }
+                    { id: 'task-kw49-1', text: 'Histo: 7. Niere & Abl. Harnwege (VL 02.12-04.12)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw49-2', text: 'AC-Block B: Redox-Reaktionen & Nernst (pdf S. 1, 23-34)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-kw49-3', text: 'Physio Test (05.12.): Atmung II', checked: false, style: '' },
+                    { id: 'task-kw49-4', text: 'Ana 1 - Lerntag 3: Untere Extremität (Knochen, Gelenke, Muskeln, Topo)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw49-5', text: 'Histo CATCH-UP: 3. Verdauung (Zähne... Magen) (VL 22.10-30.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' }
                 ]
             },
-            phase6: { // 08.02. - 30.04.
+            kw50: {
+                goals: [ { id: 'goal-kw50-1', text: '<strong>KLAUSUR: Med. Psychologie (09.12.)</strong>', style: 'p-4 bg-yellow-100 rounded-lg text-yellow-900 border border-yellow-300 font-bold' },
+                         { id: 'goal-kw50-2', text: '<strong>Physio-Test (12.12.)</strong> bestehen', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' } ],
+                tasks: [
+                    { id: 'task-kw50-1', text: 'FINALE LERNPHASE MED. PSYCHOLOGIE (07.12. - 08.12.)', checked: false, style: 'font-bold text-yellow-800 bg-yellow-50' },
+                    { id: 'task-kw50-2', text: 'Histo: 7. Niere & Abl. Harnwege (VL 08.12-10.12) besuchen/lernen', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw50-3', text: 'Physio Test (12.12.): Niere I', checked: false, style: '' }
+                ]
+            },
+            kw51: {
+                goals: [ { id: 'goal-kw51-1', text: '<strong>KLAUSUR: Histologie II (16.12.)</strong>', style: 'p-4 bg-purple-100 rounded-lg text-purple-900 border border-purple-300 font-bold' },
+                         { id: 'goal-kw51-2', text: '<strong>Letzter Physio-Test (19.12.)</strong>', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' } ],
+                tasks: [
+                    { id: 'task-kw51-1', text: 'FINALE LERNPHASE HISTOLOGIE (Alle Histo II Themen) (13.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
+                    { id: 'task-kw51-2', text: 'Ana 1 - Lerntag 4: Rücken, Brust-, Bauchwand, Beckenboden', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw51-3', text: 'Physio Test (19.12.): Elektrolyt-/Säure-Basen', checked: false, style: '' }
+                ]
+            },
+            kw52: {
+                goals: [ { id: 'goal-kw52-1', text: '<strong>WEIHNACHTSPAUSE</strong>', style: 'p-4 bg-teal-50 rounded-lg text-teal-800 font-medium' } ],
+                tasks: [
+                    { id: 'task-kw52-1', text: 'Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
+                    { id: 'task-kw52-2', text: 'Ana 2 - Lernpaket 5: Brustsitus (Herz, Lunge, Ösophagus)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw52-3', text: 'AC-Block C: Thermodynamik & Kinetik (pdf S. 2, 3, 11-15)', checked: false, style: 'font-semibold text-orange-700' }
+                ]
+            },
+            kw01: {
+                goals: [ { id: 'goal-kw01-1', text: 'Ana 2 (Eingeweide) & BC-Praktikum vorbereiten', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' } ],
+                tasks: [
+                    { id: 'task-kw01-1', text: 'Ana 2 - Lernpaket 6: Bauchsitus (Magen, Darm, Leber, Pankreas)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw01-2', text: 'Vor 07.01.: Überblick Biochemie-Praktikumsthemen', checked: false, style: '' }
+                ]
+            },
+            kw02: {
+                goals: [ { id: 'goal-kw02-1', text: '<strong>Start Biochemie Praktikum (07.01.)</strong>', style: 'p-4 bg-green-50 rounded-lg text-green-800 font-medium' } ],
+                tasks: [
+                    { id: 'task-kw02-1', text: 'Biochemie-Praktikum (ab 07.01.) täglich vor/nachbereiten', checked: false, style: 'font-semibold text-green-700' },
+                    { id: 'task-kw02-2', text: 'Ana 2 - Lernpaket 7 & 8: Beckensitus, Geschlechtsorgane, Leitungsbahnen', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw02-3', text: 'AC-Block D: Atomtheorie, PSE, Trends (pdf S. 4-6)', checked: false, style: 'font-semibold text-orange-700' }
+                ]
+            },
+            kw03: {
+                goals: [ { id: 'goal-kw03-1', text: '<strong>FINALE: Ganzkörpertestat (20.01.)</strong>', style: 'p-4 bg-red-100 rounded-lg text-red-900 border border-red-300 font-bold' } ],
+                tasks: [
+                    { id: 'task-kw03-1', text: 'Ana 3 - Lernpaket 9 & 10: Kopf & Hals', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw03-2', text: 'Ana 3 - Lernpaket 11 & 12: ZNS, Sinnesorgane', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-kw03-3', text: 'Biochemie-Praktikum weiterführen', checked: false, style: 'font-semibold text-green-700' }
+                ]
+            },
+            kw04: {
+                goals: [ { id: 'goal-kw04-1', text: '<strong>TESTAT-WOCHE</strong>', style: 'p-4 bg-red-100 rounded-lg text-red-900 border border-red-300 font-bold' } ],
+                tasks: [
+                    { id: 'task-kw04-1', text: 'Ana-Block 7: Puffer & Finale Repetition (Ana 1, 2, 3) (19.01. - 20.01.)', checked: false, style: 'font-bold text-red-900' },
+                    { id: 'task-kw04-2', text: 'Ab 21.01.: Fokus auf Biochemie (Nachbereitung Praktikum) & Termi', checked: false, style: '' },
+                    { id: 'task-kw04-3', text: 'Biochemie-Praktikum weiterführen', checked: false, style: 'font-semibold text-green-700' }
+                ]
+            },
+            kw05: {
+                goals: [ { id: 'goal-kw05-1', text: 'Vorbereitung Klausurenwoche', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' } ],
+                tasks: [
+                    { id: 'task-kw05-1', text: 'Biochemie-Praktikum abschließen (bis 30.01.)', checked: false, style: 'font-semibold text-green-700' },
+                    { id: 'task-kw05-2', text: 'Terminologie Vokabeln lernen', checked: false, style: '' },
+                    { id: 'task-kw05-3', text: 'AC-Block E: Bindungstypen, Lewis, VSEPR (pdf S. 6-10)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-kw05-4', text: 'AC-Block F: Komplexe & Nomenklatur (pdf S. 35-43)', checked: false, style: 'font-semibold text-orange-700' }
+                ]
+            },
+            kw06: {
                 goals: [
-                    { id: 'goal-histo-retry', text: '<strong>Histo-Nachklausur:</strong> 02.02.2026 (falls nötig)', style: 'p-4 bg-purple-50 rounded-lg text-purple-800' },
-                    { id: 'goal6-1', text: '<strong>Physiologie Praktikum:</strong> 11.03. - 02.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
-                    { id: 'goal6-2', text: '<strong>Klausur Physiologie:</strong> 09.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800 font-medium' },
-                    { id: 'goal6-3', text: '<strong>Klausur Chemie (OC):</strong> April 2026 (TBD)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' }
+                    { id: 'goal-kw06-histo', text: '<strong>Histo-Nachklausur (02.02.)</strong>', style: 'p-4 bg-purple-50 rounded-lg text-purple-800' },
+                    { id: 'goal-kw06-bc', text: '<strong>Biochemie (04.02.)</strong>', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
+                    { id: 'goal-kw06-termi', text: '<strong>Terminologie (04.02.)</strong>', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
+                    { id: 'goal-kw06-bio', text: '<strong>Biologie (06.02.)</strong>', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
+                    { id: 'goal-kw06-ac', text: '<strong>Chemie (AC) (07.02.)</strong>', style: 'p-4 bg-orange-100 rounded-lg text-orange-900 border border-orange-300' }
                 ],
                 tasks: [
-                    { id: 'task6-1', text: 'Nach Feb-Klausuren: Pause machen!', checked: false, style: '' },
-                    { id: 'task-histo-retry', text: 'Histo: Ggf. Nachklausur (02.02.26) vorbereiten', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task6-2', text: 'Ab Ende Feb.: Physiologie-Stoff der Wochentests reaktivieren', checked: false, style: '' },
-                    { id: 'task6-3', text: 'Physiologie-Praktikum (März) intensiv nutzen', checked: false, style: '' },
-                    { id: 'task6-4', text: 'Lernplan für OC-Klausur erstellen', checked: false, style: '' }
+                    { id: 'task-kw06-1', text: 'Histo: Ggf. Nachklausur (02.02.26) vorbereiten', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-kw06-2', text: 'Finale Lernphase BC & Termi', checked: false, style: '' },
+                    { id: 'task-kw06-3', text: '04.02. & 05.02.: Fokus auf Biologie für Mediziner', checked: false, style: '' },
+                    { id: 'task-kw06-4', text: 'AC-Block G: Finale Altklausuren & Formeln (pdf S. 1-3)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-kw06-5', text: '06.02.: AC-Klausurvorbereitung (letzter Tag)', checked: false, style: 'font-bold text-orange-900' }
+                ]
+            },
+            kw_future: {
+                goals: [
+                    { id: 'goal-future-1', text: '<strong>Physiologie Praktikum:</strong> 11.03. - 02.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
+                    { id: 'goal-future-2', text: '<strong>Klausur Physiologie:</strong> 09.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800 font-medium' },
+                    { id: 'goal-future-3', text: '<strong>Klausur Chemie (OC):</strong> April 2026 (TBD)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' }
+                ],
+                tasks: [
+                    { id: 'task-future-1', text: 'Nach Feb-Klausuren: Pause machen!', checked: false, style: '' },
+                    { id: 'task-future-2', text: 'Ab Ende Feb.: Physiologie-Stoff der Wochentests reaktivieren', checked: false, style: '' },
+                    { id: 'task-future-3', text: 'Physiologie-Praktikum (März) intensiv nutzen', checked: false, style: '' },
+                    { id: 'task-future-4', text: 'Lernplan für OC-Klausur erstellen', checked: false, style: '' }
                 ]
             }
         };
@@ -625,16 +392,15 @@
 
         // --- Initialisierung ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Aktuelles Datum anzeigen
             currentDateElement.textContent = `Heute: ${now.toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
-            
-            setupMenuListeners(); // V17
+            setupMenuListeners();
             loadStateFromLocalStorage();
+            createPhaseSections(); // Phasen-HTML dynamisch erstellen
             setupGlobalEventListeners();
             renderAllPhases();
-            updateOverallProgress(); // Gesamt-Balken
-            highlightPhaseStatus(); // Phasen-Status (Farben)
-            updateAllPhaseProgressBars(); // Alle Phasen-Balken
+            updateOverallProgress();
+            highlightPhaseStatus();
+            updateAllPhaseProgressBars();
         });
         
         // --- V17: Menü-Funktionen ---
@@ -652,45 +418,114 @@
             overlay.classList.add('hidden');
         }
 
+        // --- V20: Phasen-HTML dynamisch erstellen ---
+        function createPhaseSections() {
+            planContainer.innerHTML = ''; // Container leeren
+            
+            Object.keys(phaseMetadata).forEach(phaseKey => {
+                const phase = phaseMetadata[phaseKey];
+                
+                // Farbschema basierend auf 'color'
+                let colors = {
+                    text: 'text-gray-800',
+                    border: 'border-gray-200',
+                    addBtn: 'bg-gray-700 hover:bg-gray-800',
+                    focusRing: 'focus:ring-gray-300'
+                };
+                if (phase.color === 'blue') {
+                    colors = { text: 'text-blue-700', border: 'border-blue-200', addBtn: 'bg-blue-500 hover:bg-blue-600', focusRing: 'focus:ring-blue-300' };
+                } else if (phase.color === 'red') {
+                    colors = { text: 'text-red-700', border: 'border-red-300', addBtn: 'bg-red-500 hover:bg-red-600', focusRing: 'focus:ring-red-300' };
+                } else if (phase.color === 'yellow') {
+                    colors = { text: 'text-yellow-700', border: 'border-yellow-300', addBtn: 'bg-yellow-500 hover:bg-yellow-600', focusRing: 'focus:ring-yellow-300' };
+                } else if (phase.color === 'purple') {
+                    colors = { text: 'text-purple-700', border: 'border-purple-300', addBtn: 'bg-purple-500 hover:bg-purple-600', focusRing: 'focus:ring-purple-300' };
+                } else if (phase.color === 'green') {
+                    colors = { text: 'text-green-700', border: 'border-green-300', addBtn: 'bg-green-500 hover:bg-green-600', focusRing: 'focus:ring-green-300' };
+                }
+                
+                const section = document.createElement('section');
+                section.id = `${phaseKey}-section`;
+                section.className = `bg-white p-6 rounded-xl shadow-lg ${colors.border}`;
+                section.innerHTML = `
+                    <h2 class="text-2xl font-semibold ${colors.text} mb-4">
+                        <span id="${phaseKey}-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                        ${phase.name}
+                    </h2>
+                    <!-- Individueller Fortschrittsbalken -->
+                    <div class="mt-2 mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Phasen-Fortschritt</span>
+                            <span id="${phaseKey}-progress-text" class="text-sm font-medium text-gray-700">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="${phaseKey}-progress-bar" class="bg-gray-600 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Ziele (Links) -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Ziele</h3>
+                            <div class="flex gap-2 mb-4">
+                                <input type="text" id="new-goal-input-${phaseKey}" placeholder="Neues Ziel..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 ${colors.focusRing}">
+                                <button data-phase="${phaseKey}" data-type="goals" class="add-btn ${colors.addBtn} text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                            </div>
+                            <ul class="space-y-3 goal-list" id="${phaseKey}-goals">
+                                <!-- JS fügt Ziele hier ein -->
+                            </ul>
+                        </div>
+                        <!-- Tracking (Rechts) -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
+                            <div class="flex gap-2 mb-4">
+                                <input type="text" id="new-task-input-${phaseKey}" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 ${colors.focusRing}">
+                                <button data-phase="${phaseKey}" data-type="tasks" class="add-btn ${colors.addBtn} text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
+                            </div>
+                            <ul class="space-y-2 task-list" id="${phaseKey}-tasks">
+                                <!-- JS fügt Tasks hier ein -->
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                planContainer.appendChild(section);
+            });
+        }
+
+
         // --- Globale Event-Listener (Event Delegation) ---
         function setupGlobalEventListeners() {
             planContainer.addEventListener('click', (e) => {
                 const target = e.target;
-                const parent = e.target.closest('span, input, button'); // Klickziel normalisieren
+                const parent = e.target.closest('span, input, button'); 
                 if (!parent) return;
 
-                // --- Add-Button ---
                 if (parent.classList.contains('add-btn')) {
                     const phase = parent.dataset.phase;
-                    const type = parent.dataset.type; // 'goals' or 'tasks'
+                    const type = parent.dataset.type; 
                     const input = document.getElementById(`new-${type.slice(0, -1)}-input-${phase}`);
                     if (input && input.value.trim()) {
                         addItem(phase, type, input.value.trim());
-                        input.value = ''; // Input-Feld leeren
+                        input.value = ''; 
                     }
                 }
 
-                // --- Delete-Button ---
                 if (parent.classList.contains('delete-btn')) {
                     const { phase, type, id } = parent.dataset;
                     deleteItem(phase, type, id);
                 }
                 
-                // --- Learn-Button (AMBOSS) ---
                 if (parent.classList.contains('learn-btn')) {
                     const { text } = parent.dataset;
-                    // Der Text ist dank .replace() im HTML-Aufbau bereits sauber
                     const encodedText = encodeURIComponent(text);
                     window.open(`https://next.amboss.com/de/search?q=${encodedText}`, '_blank');
                 }
 
-                // --- Checkbox ---
                 if (parent.matches('input[type="checkbox"]')) {
                     const { phase, id } = parent.dataset;
                     toggleTask(phase, id, parent.checked);
                 }
                 
-                // --- Edit-Span ---
                 if (parent.classList.contains('edit-span') && !parent.isContentEditable) {
                     startEditing(parent);
                 }
@@ -720,11 +555,9 @@
                 const newText = input.value.trim() || originalText;
                 const item = dataState[phase][type].find(i => i.id === id);
                 if (item) {
-                    // Simples HTML-Parsing, um Formatierung zu erhalten
                     if (originalHtml.includes('<strong>')) {
                          item.text = `<strong>${newText.replace(/<\/?strong>/g, '')}</strong>`;
                     } else if (originalHtml.includes('<br>')) {
-                         // Ersetze \n (das ein Input macht) zurück zu <br>
                          item.text = newText.replace(/\n/g, '<br>');
                     }
                     else {
@@ -807,9 +640,7 @@
             return li;
         }
 
-
         // --- CRUD-Logik-Funktionen ---
-        
         function addItem(phase, type, text) {
             const newItem = {
                 id: `item-${Date.now()}`,
@@ -869,21 +700,19 @@
                 try {
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataState));
                     statusElement.textContent = "Lokal gespeichert";
-                    // UI-Updates nach dem Speichern
-                    updateOverallProgress(); // Gesamt-Balken
-                    highlightPhaseStatus(); // Phasen-Status (Farben)
-                    updateAllPhaseProgressBars(); // Alle Phasen-Balken (liest Phasen-Status)
+                    updateOverallProgress(); 
+                    highlightPhaseStatus(); 
+                    updateAllPhaseProgressBars();
                 } catch (error) {
                     console.error("Fehler beim Speichern in localStorage:", error);
                     statusElement.textContent = "Speicherfehler!";
                 } finally {
                     statusElement.classList.remove('syncing');
                 }
-            }, 1000); // 1 Sekunde Verzögerung
+            }, 1000); 
         }
         
         // --- Fortschritt & Status Updates ---
-        
         function updateOverallProgress() {
             let totalTasks = 0;
             let checkedTasks = 0;
