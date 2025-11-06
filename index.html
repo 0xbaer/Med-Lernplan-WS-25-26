@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mwin Medi-Lernplan WS 25/26 </title>
+    <title>Mein Medi-Lernplan WS 25/26 </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -47,8 +47,18 @@
             padding: 0 4px;
             font-family: monospace;
             color: #ef4444; /* red-500 */
+            align-self: flex-start;
         }
-        .task-item:hover .delete-btn, .goal-item:hover .delete-btn {
+        /* "Lernen"-Button (Buch) */
+        .learn-btn {
+            opacity: 0.3;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            padding: 0 6px;
+            align-self: flex-start;
+        }
+        .task-item:hover .delete-btn, .goal-item:hover .delete-btn,
+        .task-item:hover .learn-btn, .goal-item:hover .learn-btn {
             opacity: 1;
         }
         /* Eingabefeld, das beim Editieren erscheint */
@@ -60,28 +70,52 @@
             outline: none;
             font: inherit;
         }
+        .phase-status-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body class="h-full p-4 md:p-8 bg-gray-100">
     <div class="max-w-7xl mx-auto">
         <header class="mb-8">
-            <div class="flex justify-between items-center">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V10)</h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan - Lokal, editierbar & dynamisch.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Mein Medi-Lernplan WS 25/26 </h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan mit AMBOSS-Link.</p>
                 </div>
-                <div class="text-right">
+                <div class="text-left md:text-right mt-4 md:mt-0">
+                    <span id="current-date" class="text-sm font-semibold text-blue-700">Lade Datum...</span><br>
                     <span id="save-status" class="text-sm text-gray-500">Bereit</span>
                 </div>
             </div>
+
+            <!-- Fortschrittsbalken -->
+            <div class="mt-8">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-blue-700">Gesamtfortschritt</span>
+                    <span id="progress-text" class="text-sm font-medium text-blue-700">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%; transition: width 0.5s ease;"></div>
+                </div>
+            </div>
+
         </header>
 
         <!-- Container für die Lernphasen -->
         <div class="space-y-8" id="plan-container">
 
             <!-- Phase 1: Aktueller Fokus -->
-            <section class="bg-white p-6 rounded-xl shadow-lg border border-blue-200">
-                <h2 class="text-2xl font-semibold text-blue-700 mb-4">Phase 1: Aktueller Fokus (Bis 07.11.2025)</h2>
+            <section id="phase1-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                    <span id="phase1-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                    Phase 1: Aktueller Fokus (Bis 07.11.2025)
+                </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Ziele (Links) -->
                     <div>
@@ -109,8 +143,11 @@
             </section>
 
             <!-- Phase 2: Der Große Dauerlauf -->
-            <section class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 2: Der große Dauerlauf (08.11. - 20.12.2025)</h2>
+            <section id="phase2-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <span id="phase2-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                    Phase 2: Der große Dauerlauf (08.11. - 20.12.2025)
+                </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Ziele (Links) -->
                     <div>
@@ -138,8 +175,11 @@
             </section>
 
             <!-- Phase 3: Fokus Anatomie & Biochemie -->
-            <section class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 3: Ana-Endspurt & Biochemie (21.12.2025 - 20.01.2026)</h2>
+            <section id="phase3-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <span id="phase3-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                    Phase 3: Ana-Endspurt & Biochemie (21.12.2025 - 20.01.2026)
+                </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Ziele (Links) -->
                     <div>
@@ -167,8 +207,11 @@
             </section>
 
             <!-- Phase 4: Klausurenphase -->
-            <section class="bg-white p-6 rounded-xl shadow-lg border border-red-300">
-                <h2 class="text-2xl font-semibold text-red-700 mb-4">Phase 4: Klausurenphase (21.01. - 07.02.2026)</h2>
+            <section id="phase4-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-red-700 mb-4">
+                    <span id="phase4-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                    Phase 4: Klausurenphase (21.01. - 07.02.2026)
+                </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Ziele (Links) -->
                     <div>
@@ -196,8 +239,11 @@
             </section>
 
             <!-- Phase 5: Langfristige Ziele -->
-            <section class="bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Phase 5: Langfristige Ziele (Frühjahr 2026)</h2>
+            <section id="phase5-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <span id="phase5-status" class="phase-status-icon bg-gray-300" title="Status"></span>
+                    Phase 5: Langfristige Ziele (Frühjahr 2026)
+                </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Ziele (Links) -->
                     <div>
@@ -227,14 +273,32 @@
         </div>
     </div>
 
-    <!-- Lokales Speicher-Skript (V10 - Voll Dynamisch) -->
+    <!-- Lokales Speicher-Skript (V12 - AMBOSS Link) -->
     <script type="module">
         
         // --- Globale Variablen ---
         let debounceTimer; // Für verzögertes Speichern
         const statusElement = document.getElementById('save-status');
-        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V10'; // Neuer Key für neue Struktur
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V12'; // Neuer Key für V12
         const planContainer = document.getElementById('plan-container');
+        const currentDateElement = document.getElementById('current-date');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        
+        // Simuliertes heutiges Datum für Tests (z.B. '2025-11-06T12:00:00')
+        // const now = new Date('2025-11-06T12:00:00'); // Test: Phase 1 aktiv
+        // const now = new Date('2025-12-22T12:00:00'); // Test: Phase 3 aktiv / Phase 2 überfällig
+        const now = new Date(); // Echtes Datum verwenden
+        
+        // --- Phasen-Zeit-Metadaten ---
+        // (Monate sind 0-basiert: 0=Jan, 10=Nov, 11=Dez)
+        const phaseMetadata = {
+            phase1: { startDate: new Date('2025-10-01'), endDate: new Date('2025-11-07T23:59:59') },
+            phase2: { startDate: new Date('2025-11-08'), endDate: new Date('2025-12-20T23:59:59') },
+            phase3: { startDate: new Date('2025-12-21'), endDate: new Date('2026-01-20T23:59:59') },
+            phase4: { startDate: new Date('2026-01-21'), endDate: new Date('2026-02-07T23:59:59') },
+            phase5: { startDate: new Date('2026-02-08'), endDate: new Date('2026-04-30T23:59:59') }
+        };
 
         // --- Standard-Datenstruktur (Ziele & Aufgaben) ---
         const defaultData = {
@@ -326,20 +390,27 @@
 
         // --- Initialisierung ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Aktuelles Datum anzeigen
+            currentDateElement.textContent = `Heute: ${now.toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+            
             loadStateFromLocalStorage();
             setupGlobalEventListeners();
-            renderAllPhases(); // UI beim Start aufbauen
+            renderAllPhases();
+            updateOverallProgress();
+            highlightPhaseStatus();
         });
 
         // --- Globale Event-Listener (Event Delegation) ---
         function setupGlobalEventListeners() {
             planContainer.addEventListener('click', (e) => {
                 const target = e.target;
+                const parent = e.target.closest('span, input, button'); // Klickziel normalisieren
+                if (!parent) return;
 
                 // --- Add-Button ---
-                if (target.classList.contains('add-btn')) {
-                    const phase = target.dataset.phase;
-                    const type = target.dataset.type; // 'goals' or 'tasks'
+                if (parent.classList.contains('add-btn')) {
+                    const phase = parent.dataset.phase;
+                    const type = parent.dataset.type; // 'goals' or 'tasks'
                     const input = document.getElementById(`new-${type.slice(0, -1)}-input-${phase}`);
                     if (input && input.value.trim()) {
                         addItem(phase, type, input.value.trim());
@@ -348,60 +419,67 @@
                 }
 
                 // --- Delete-Button ---
-                if (target.classList.contains('delete-btn')) {
-                    const { phase, type, id } = target.dataset;
+                if (parent.classList.contains('delete-btn')) {
+                    const { phase, type, id } = parent.dataset;
                     deleteItem(phase, type, id);
+                }
+                
+                // --- Learn-Button (AMBOSS) ---
+                if (parent.classList.contains('learn-btn')) {
+                    const { text } = parent.dataset;
+                    // Der Text ist dank .replace() im HTML-Aufbau bereits sauber
+                    const encodedText = encodeURIComponent(text);
+                    window.open(`https://next.amboss.com/de/search?q=${encodedText}`, '_blank');
                 }
 
                 // --- Checkbox ---
-                if (target.matches('input[type="checkbox"]')) {
-                    const { phase, id } = target.dataset;
-                    toggleTask(phase, id, target.checked);
+                if (parent.matches('input[type="checkbox"]')) {
+                    const { phase, id } = parent.dataset;
+                    toggleTask(phase, id, parent.checked);
                 }
                 
                 // --- Edit-Span ---
-                if (target.classList.contains('edit-span') && !target.isContentEditable) {
-                    startEditing(target);
+                if (parent.classList.contains('edit-span') && !parent.isContentEditable) {
+                    startEditing(parent);
                 }
             });
         }
         
         // --- Editier-Logik ---
         function startEditing(span) {
-            // Verhindern, dass ein Klick auf ein bereits editierendes Element alles kaputt macht
             if (span.dataset.editing === 'true') return;
             span.dataset.editing = 'true';
             
             const { phase, type, id } = span.dataset;
-            const originalHtml = span.innerHTML; // HTML speichern (für <strong> etc.)
-            const originalText = span.textContent; // Nur Text für das Input-Feld
+            const originalHtml = span.innerHTML;
+            const originalText = span.textContent;
             
             const input = document.createElement('input');
             input.type = 'text';
             input.className = 'editing-input';
             input.value = originalText;
 
-            // Span durch Input ersetzen
             span.innerHTML = '';
             span.appendChild(input);
             input.focus();
             input.select();
 
-            // Event-Listener für das Input-Feld
             const save = () => {
-                const newHtml = input.value.trim() || originalText; // Leere Eingaben verhindern
-                // Finde das Item und update seinen Text
+                const newText = input.value.trim() || originalText;
                 const item = dataState[phase][type].find(i => i.id === id);
                 if (item) {
-                    // Simples HTML-Parsing, um <strong> zu erhalten
+                    // Simples HTML-Parsing, um Formatierung zu erhalten
                     if (originalHtml.includes('<strong>')) {
-                         item.text = `<strong>${newHtml.replace(/<\/?strong>/g, '')}</strong>`;
-                    } else {
-                         item.text = newHtml;
+                         item.text = `<strong>${newText.replace(/<\/?strong>/g, '')}</strong>`;
+                    } else if (originalHtml.includes('<br>')) {
+                         // Ersetze \n (das ein Input macht) zurück zu <br>
+                         item.text = newText.replace(/\n/g, '<br>');
+                    }
+                    else {
+                         item.text = newText;
                     }
                     saveStateToLocalStorage();
                 }
-                // Input wieder durch Span ersetzen (neu rendern)
                 span.innerHTML = item ? item.text : originalHtml;
                 span.dataset.editing = 'false';
             };
@@ -411,7 +489,6 @@
                 if (e.key === 'Enter') {
                     save();
                 } else if (e.key === 'Escape') {
-                    // Abbrechen: Input durch originalen Span ersetzen
                     span.innerHTML = originalHtml;
                     span.dataset.editing = 'false';
                 }
@@ -430,12 +507,9 @@
         function renderPhase(phase, type) { // type is 'goals' or 'tasks'
             const listElement = document.getElementById(`${phase}-${type}`);
             if (!listElement) return; 
+            listElement.innerHTML = ''; 
 
-            listElement.innerHTML = ''; // Liste leeren
-
-            if (!dataState[phase] || !dataState[phase][type]) {
-                return; // Daten (noch) nicht vorhanden
-            }
+            if (!dataState[phase] || !dataState[phase][type]) return;
 
             dataState[phase][type].forEach(item => {
                 let li;
@@ -453,6 +527,7 @@
             const li = document.createElement('li');
             li.className = `goal-item flex justify-between items-center ${goal.style || 'p-4 bg-gray-50 rounded-lg text-gray-800'}`;
             li.innerHTML = `
+                <span class="learn-btn" data-text="${goal.text.replace(/<[^>]+>/g, ' ')}" title="In AMBOSS suchen...">📚</span>
                 <span class="edit-span flex-grow" data-phase="${phase}" data-type="goals" data-id="${goal.id}">${goal.text}</span>
                 <span data-phase="${phase}" data-type="goals" data-id="${goal.id}" class="delete-btn" title="Löschen">X</span>
             `;
@@ -474,6 +549,7 @@
                          <span class="edit-span" data-phase="${phase}" data-type="tasks" data-id="${task.id}">${task.text}</span>
                     </label>
                 </div>
+                <span class="learn-btn" data-text="${task.text.replace(/<[^>]+>/g, ' ')}" title="In AMBOSS suchen...">📚</span>
                 ${!disabled ? `<span data-phase="${phase}" data-type="tasks" data-id="${task.id}" class="delete-btn" title="Löschen">X</span>` : ''}
             `;
             return li;
@@ -484,14 +560,14 @@
         
         function addItem(phase, type, text) {
             const newItem = {
-                id: `item-${Date.now()}`, // Eindeutige ID
+                id: `item-${Date.now()}`,
                 text: text,
-                style: (type === 'goals') ? 'p-4 bg-gray-50 rounded-lg text-gray-800' : '', // Standardstil
-                checked: false, // Nur für Tasks relevant, stört bei Zielen nicht
+                style: (type === 'goals') ? 'p-4 bg-gray-50 rounded-lg text-gray-800' : '',
+                checked: false,
                 custom: true
             };
             dataState[phase][type].push(newItem);
-            renderPhase(phase, type); // Nur die betroffene Liste neu rendern
+            renderPhase(phase, type);
             saveStateToLocalStorage();
         }
 
@@ -505,7 +581,7 @@
 
         function deleteItem(phase, type, id) {
             dataState[phase][type] = dataState[phase][type].filter(item => item.id !== id);
-            renderPhase(phase, type); // Nur die betroffene Liste neu rendern
+            renderPhase(phase, type);
             saveStateToLocalStorage();
         }
 
@@ -519,17 +595,14 @@
                 // Stelle sicher, dass alle Phasen/Typen existieren
                 Object.keys(defaultData).forEach(phase => {
                     if (!dataState[phase]) {
-                        dataState[phase] = defaultData[phase]; // Ganze Phase fehlt
+                        dataState[phase] = defaultData[phase];
                     } else {
                         if (!dataState[phase].goals) dataState[phase].goals = defaultData[phase].goals;
                         if (!dataState[phase].tasks) dataState[phase].tasks = defaultData[phase].tasks;
                     }
                 });
-
             } else {
-                // Beim allerersten Laden
                 dataState = JSON.parse(JSON.stringify(defaultData)); // Tiefe Kopie
-                console.log("Keine lokalen Daten. Verwende Standard-Daten.");
             }
             statusElement.textContent = "Bereit";
         }
@@ -544,6 +617,9 @@
                 try {
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataState));
                     statusElement.textContent = "Lokal gespeichert";
+                    // UI-Updates nach dem Speichern
+                    updateOverallProgress();
+                    highlightPhaseStatus();
                 } catch (error) {
                     console.error("Fehler beim Speichern in localStorage:", error);
                     statusElement.textContent = "Speicherfehler!";
@@ -551,6 +627,73 @@
                     statusElement.classList.remove('syncing');
                 }
             }, 1000); // 1 Sekunde Verzögerung
+        }
+        
+        // --- NEUE FUNKTIONEN (V11) ---
+        
+        // --- Gesamtfortschritt berechnen & anzeigen ---
+        function updateOverallProgress() {
+            let totalTasks = 0;
+            let checkedTasks = 0;
+            
+            Object.keys(dataState).forEach(phase => {
+                dataState[phase].tasks.forEach(task => {
+                    if (!task.disabled) { // Blocker (Urlaub etc.) nicht mitzählen
+                        totalTasks++;
+                        if (task.checked) {
+                            checkedTasks++;
+                        }
+                    }
+                });
+            });
+            
+            const percentage = (totalTasks === 0) ? 0 : Math.round((checkedTasks / totalTasks) * 100);
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `${percentage}% (${checkedTasks}/${totalTasks})`;
+        }
+        
+        // --- Phasen-Status (Aktiv, Überfällig) hervorheben ---
+        function highlightPhaseStatus() {
+            Object.keys(phaseMetadata).forEach(phase => {
+                const meta = phaseMetadata[phase];
+                const phaseData = dataState[phase];
+                const icon = document.getElementById(`${phase}-status`);
+                const section = document.getElementById(`${phase}-section`);
+                
+                if (!icon || !section || !phaseData) return;
+
+                // Status zurücksetzen
+                icon.className = 'phase-status-icon';
+                section.style.border = 'none';
+
+                // 1. Prüfen, ob alle Tasks erledigt sind
+                const openTasks = phaseData.tasks.some(task => !task.checked && !task.disabled);
+                if (!openTasks) {
+                    icon.classList.add('bg-green-500'); // Grün: Erledigt
+                    icon.title = "Erledigt";
+                    section.style.borderColor = '#22c55e'; // green-500
+                    return;
+                }
+                
+                // 2. Prüfen auf Zeit-Status
+                if (now >= meta.startDate && now <= meta.endDate) {
+                    icon.classList.add('bg-blue-500'); // Blau: Aktiv
+                    icon.title = "Aktive Phase";
+                    section.style.border = '2px solid #3b82f6'; // blue-500
+                } else if (now > meta.endDate && openTasks) {
+                    icon.classList.add('bg-red-500'); // Rot: Überfällig
+                    icon.title = "Überfällig (Aufgaben offen)";
+                    section.style.border = '2px solid #ef4444'; // red-500
+                } else if (now < meta.startDate) {
+                    icon.classList.add('bg-gray-300'); // Grau: Zukünftig
+                    icon.title = "Zukünftig";
+                } else {
+                     icon.classList.add('bg-gray-300'); // Grau: Vergangen (aber erledigt)
+                    icon.title = "Vergangen";
+
+                }
+            });
         }
 
     </script>
