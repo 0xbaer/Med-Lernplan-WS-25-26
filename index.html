@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Medi-Lernplan WS 25/26 (V18 - Endspurt-Integration)</title>
+    <title>Mein Medi-Lernplan WS 25/26 (V19 - Histo II Topics)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -177,8 +177,8 @@
         <header class="mb-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V18)</h1>
-                    <p class="text-lg text-gray-600">Integriert mit Endspurt-Lerntagen.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V19)</h1>
+                    <p class="text-lg text-gray-600">Integriert mit Histo II Vorlesungsplan.</p>
                 </div>
                 <div class="text-left md:text-right mt-4 md:mt-0 flex items-center">
                     <div class="mr-6">
@@ -469,13 +469,13 @@
         </div>
     </div>
 
-    <!-- Lokales Speicher-Skript (V18 - Endspurt-Integration) -->
+    <!-- Lokales Speicher-Skript (V19 - Histo II Topics) -->
     <script type="module">
         
         // --- Globale Variablen ---
         let debounceTimer; // Für verzögertes Speichern
         const statusElement = document.getElementById('save-status');
-        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V18'; // Neuer Key für V18
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V19'; // Neuer Key für V19
         const planContainer = document.getElementById('plan-container');
         const currentDateElement = document.getElementById('current-date');
         const globalProgressBar = document.getElementById('progress-bar');
@@ -488,8 +488,8 @@
         const closeBtn = document.getElementById('close-menu-btn');
 
         // Simuliertes heutiges Datum für Tests (z.B. '2025-11-06T12:00:00')
-        // const now = new Date('2025-11-06T12:00:00'); // Test: Phase 1 aktiv
-        const now = new Date(); // Echtes Datum verwenden
+        const now = new Date('2025-11-06T12:00:00'); // Test: Phase 1 aktiv
+        // const now = new Date(); // Echtes Datum verwenden
         // const now = new Date('2025-12-10T12:00:00'); // Test: Phase 3 aktiv
         
         // --- Phasen-Zeit-Metadaten (6-Phasen-Struktur) ---
@@ -502,7 +502,7 @@
             phase6: { startDate: new Date('2026-02-08'), endDate: new Date('2026-04-30T23:59:59') }
         };
 
-        // --- Standard-Datenstruktur (V18 - 6-Phasen-Struktur mit Endspurt-Tasks) ---
+        // --- Standard-Datenstruktur (V19 - 6-Phasen-Struktur mit Histo II Topics) ---
         const defaultData = {
             phase1: { // Bis 07.11.
                 goals: [
@@ -513,7 +513,7 @@
                     { id: 'task1-2', text: 'Physio-Seminar WS 4: "Erythrozyten & Anämien" verstehen', checked: false, style: '' },
                     { id: 'task1-3', text: 'Physio-Seminar WS 4: "Blutgruppen" wiederholen', checked: false, style: '' },
                     { id: 'task1-4', text: 'AC-Selbststudium: PDF sichten & Lernplan-Blöcke verstehen', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-histo-start', text: 'Histo-Notfallplan: Unterlagen sichten & Histo Skript "Lerntag 14: Zelle" beginnen', checked: false, style: 'font-semibold text-purple-700' }
+                    { id: 'task-histo-start', text: 'Histo: Vorlesung 06.11. (Leber II) besuchen/nacharbeiten', checked: false, style: 'font-semibold text-purple-700' }
                 ]
             },
             phase2: { // 08.11. - 01.12.
@@ -527,15 +527,19 @@
                     { id: 'goal2-6', text: '<strong>Urlaub:</strong> 19.11. - 21.11. (Buenos Aires!)', style: 'p-4 bg-teal-50 rounded-lg text-teal-800' }
                 ],
                 tasks: [
-                    { id: 'task-histo-14', text: 'Histo - Lerntag 14: Zelle', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
+                    { id: 'task-histo-catchup-1', text: 'Histo CATCH-UP: 1. Immunologie & Lymph. Organe (VL 13.10-21.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
+                    { id: 'task-histo-catchup-2', text: 'Histo CATCH-UP: 3. Verdauung (Zähne, Speicheldrüsen, Oesophagus, Magen) (VL 22.10-30.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
+                    { id: 'task-histo-current-1', text: 'Histo: 3. Verdauung (Dünn-/Dickdarm, Leber, Pankreas) (VL 03.11-10.11)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-histo-current-2', text: 'Histo: 4. Endokrines System (VL 11.11-13.11)', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task2-3', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false, style: '' },
-                    { id: 'task-histo-15', text: 'Histo - Lerntag 15: Gewebe', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task-ana-1', text: 'Ana 1 - Lerntag 1: Allg. Ana/Embryo, Obere Extremität (Knochen, Gelenke)', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task-ac-1', text: 'AC-Block A: Grundlagen, Formeln, Säure/Base (pdf S. 1-3, 16-22, 44-46)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-histo-current-3', text: 'Histo: 5. Weibl. Genitale I (VL 17.11-18.11)', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task-vacation', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
+                    { id: 'task-histo-catchup-3', text: 'NACHHOLEN (nach 21.11.): Histo: 5. Weibl. Genitale II (VL 19.11-24.11)', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task2-4', text: 'NACHHOLEN (nach 21.11.): Physio-Stoff "Energiehaushalt"', checked: false, style: '' },
-                    { id: 'task-histo-16', text: 'Histo - Lerntag 16: Nervengewebe, Herz-Kreislauf', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task2-6', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false, style: 'font-bold text-yellow-800' },
+                    { id: 'task-histo-current-4', text: 'Histo: 6. Männl. Genitale (VL 25.11-01.12)', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' },
                     { id: 'task-ana-2', text: 'Ana 1 - Lerntag 2: Obere Extremität (Muskeln, Leitungsbahnen, Topo)', checked: false, style: 'font-semibold text-red-700' }
                 ]
@@ -549,15 +553,13 @@
                     { id: 'goal3-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' }
                 ],
                 tasks: [
-                    { id: 'task-histo-17', text: 'Histo - Lerntag 17: Lymph. Gewebe, Atmung', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
+                    { id: 'task-histo-current-5', text: 'Histo: 7. Niere & Abl. Harnwege (VL 02.12-10.12)', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task-ac-2', text: 'AC-Block B: Redox-Reaktionen & Nernst (pdf S. 1, 23-34)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task3-8', text: 'Physio Test (05.12.): Atmung II', checked: false, style: '' },
                     { id: 'task-psycho-final', text: 'FINALE LERNPHASE MED. PSYCHOLOGIE (06.12. - 08.12.)', checked: false, style: 'font-bold text-yellow-800 bg-yellow-50' },
                     { id: 'task-ana-3', text: 'Ana 1 - Lerntag 3: Untere Extremität (Knochen, Gelenke, Muskeln, Topo)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-histo-18', text: 'Histo - Lerntag 18: Verdauung, Harnsystem', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task3-9', text: 'Physio Test (12.12.): Niere I', checked: false, style: '' },
-                    { id: 'task-histo-19', text: 'Histo - Lerntag 19: Geschlechtsorgane, Haut, ZNS, Sinnesorg.', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
-                    { id: 'task-histo-final', text: 'FINALE LERNPHASE HISTOLOGIE (13.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
+                    { id: 'task-histo-final', text: 'FINALE LERNPHASE HISTOLOGIE (Alle Themen wiederholen) (13.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
                     { id: 'task-ana-4', text: 'Ana 1 - Lerntag 4: Rücken, Brust-, Bauchwand, Beckenboden', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task3-11', text: 'Physio Test (19.12.): Elektrolyt-/Säure-Basen', checked: false, style: '' }
                 ]
@@ -586,7 +588,6 @@
             },
             phase5: { // 21.01. - 07.02.
                 goals: [
-                    { id: 'goal-histo-retry', text: '<strong>Evtl. Histo-Nachklausur:</strong> 02.02.2026', style: 'p-4 bg-purple-50 rounded-lg text-purple-800' },
                     { id: 'goal5-1', text: '<strong>Biochemie:</strong> 04.02.2026 (9:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
                     { id: 'goal5-2', text: '<strong>Terminologie:</strong> 04.02.2026 (11:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
                     { id: 'goal5-3', text: '<strong>Biologie:</strong> 06.02.2026 (12:00)', style: 'p-4 bg-gray-50 rounded-lg text-gray-800' },
@@ -604,12 +605,14 @@
             },
             phase6: { // 08.02. - 30.04.
                 goals: [
+                    { id: 'goal-histo-retry', text: '<strong>Histo-Nachklausur:</strong> 02.02.2026 (falls nötig)', style: 'p-4 bg-purple-50 rounded-lg text-purple-800' },
                     { id: 'goal6-1', text: '<strong>Physiologie Praktikum:</strong> 11.03. - 02.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
                     { id: 'goal6-2', text: '<strong>Klausur Physiologie:</strong> 09.04.2026', style: 'p-4 bg-blue-50 rounded-lg text-blue-800 font-medium' },
                     { id: 'goal6-3', text: '<strong>Klausur Chemie (OC):</strong> April 2026 (TBD)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' }
                 ],
                 tasks: [
                     { id: 'task6-1', text: 'Nach Feb-Klausuren: Pause machen!', checked: false, style: '' },
+                    { id: 'task-histo-retry', text: 'Histo: Ggf. Nachklausur (02.02.26) vorbereiten', checked: false, style: 'font-semibold text-purple-700' },
                     { id: 'task6-2', text: 'Ab Ende Feb.: Physiologie-Stoff der Wochentests reaktivieren', checked: false, style: '' },
                     { id: 'task6-3', text: 'Physiologie-Praktikum (März) intensiv nutzen', checked: false, style: '' },
                     { id: 'task6-4', text: 'Lernplan für OC-Klausur erstellen', checked: false, style: '' }
