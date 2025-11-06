@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Med-Lernplan WS 25/26 (V8 - Dynamische Tasks)</title>
+    <title>Dein Med-Lernplan WS 25/26 (V9 - Lokaler Speicher)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +19,7 @@
             cursor: pointer;
         }
         /* Kleine Lade-Animation für den Sync-Status */
-        #auth-status.syncing::after {
+        #save-status.syncing::after {
             content: ' .';
             animation: dots 1s steps(5, end) infinite;
         }
@@ -46,16 +46,17 @@
         <header class="mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V8)</h1>
-                    <p class="text-lg text-gray-600">Interaktiver Plan - Jetzt mit dynamischen Tasks & DB-Sync.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V9)</h1>
+                    <p class="text-lg text-gray-600">Interaktiver Plan - Speichert jetzt lokal im Browser.</p>
                 </div>
                 <div class="text-right">
-                    <span id="auth-status" class="text-sm text-gray-500">Initialisiere...</span>
+                    <!-- Neuer, einfacherer Status-Indicator -->
+                    <span id="save-status" class="text-sm text-gray-500">Bereit</span>
                 </div>
             </div>
         </header>
 
-        <!-- Container für die Lernphasen -->
+        <!-- Container für die Lernphasen (HTML bleibt gleich) -->
         <div class="space-y-8">
 
             <!-- Phase 1: Aktueller Fokus -->
@@ -70,12 +71,10 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <!-- NEU: Form zum Hinzufügen -->
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="new-task-input-phase1" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300">
                             <button data-phase="phase1" class="add-task-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
                         </div>
-                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase1-tasks">
                             <!-- JS fügt Tasks hier ein -->
                         </ul>
@@ -104,12 +103,10 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <!-- NEU: Form zum Hinzufügen -->
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="new-task-input-phase2" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
                             <button data-phase="phase2" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
                         </div>
-                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase2-tasks">
                             <!-- JS fügt Tasks hier ein -->
                         </ul>
@@ -132,12 +129,10 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste (NEU mit Weihnachtspause)</h3>
-                        <!-- NEU: Form zum Hinzufügen -->
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="new-task-input-phase3" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
                             <button data-phase="phase3" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
                         </div>
-                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase3-tasks">
                             <!-- JS fügt Tasks hier ein -->
                         </ul>
@@ -168,12 +163,10 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <!-- NEU: Form zum Hinzufügen -->
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="new-task-input-phase4" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-300">
                             <button data-phase="phase4" class="add-task-btn bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
                         </div>
-                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase4-tasks">
                             <!-- JS fügt Tasks hier ein -->
                         </ul>
@@ -195,12 +188,10 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Tracking-Liste</h3>
-                        <!-- NEU: Form zum Hinzufügen -->
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="new-task-input-phase5" placeholder="Neue Aufgabe..." class="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
                             <button data-phase="phase5" class="add-task-btn bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-semibold">Add</button>
                         </div>
-                        <!-- Liste wird dynamisch gefüllt -->
                         <ul class="space-y-2 task-list" id="phase5-tasks">
                             <!-- JS fügt Tasks hier ein -->
                         </ul>
@@ -211,25 +202,16 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Lokales Speicher-Skript (kein Firebase mehr) -->
     <script type="module">
-        // Importiere notwendige Firebase Module
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
+        
         // --- Globale Variablen ---
-        let db;
-        let auth;
-        let userId = null;
-        let dbRef = null; // Referenz zum Firestore-Dokument
         let debounceTimer; // Für verzögertes Speichern
-        
-        const statusElement = document.getElementById('auth-status');
-        
-        // --- NEU: Standard-Aufgabenstruktur ---
-        // Dies ist der "Fallback", falls nichts in der DB gespeichert ist.
-        let taskState = {
+        const statusElement = document.getElementById('save-status');
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan';
+
+        // --- Standard-Aufgabenstruktur ---
+        const defaultTasks = {
             phase1: [
                 { id: 'task1-1', text: 'Thema "Blut I" (Zusammensetzung) lernen', checked: false },
                 { id: 'task1-2', text: 'Thema "Erythrozyten & Anämien" verstehen', checked: false },
@@ -275,68 +257,17 @@
             ]
         };
 
+        // Der aktuelle Status der Aufgaben
+        let taskState;
+
         // --- Initialisierung ---
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- HIER DEINE FIREBASE KONFIGURATION EINFÜGEN ---
-            const firebaseConfig = {
-                apiKey: "DEIN_API_KEY", // Ersetze "DEIN_API_KEY"
-                authDomain: "DEIN_PROJEKT.firebaseapp.com",
-                projectId: "DEIN_PROJEKT_ID",
-                storageBucket: "DEIN_PROJEKT.appspot.com",
-                messagingSenderId: "DEIN_SENDER_ID",
-                appId: "DEIN_APP_ID"
-            };
-            
-            const appId = firebaseConfig.projectId || 'default-study-plan';
-
-            // Firebase initialisieren
-            try {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-            } catch (e) {
-                console.error("Firebase-Initialisierung fehlgeschlagen:", e);
-                statusElement.textContent = "Fehler bei Init.";
-                return;
-            }
-
-            // Authentifizierung starten
-            handleAuth(appId);
-            // NEU: Event-Listener für Buttons und Listen einrichten
+            loadStateFromLocalStorage();
             setupGlobalEventListeners();
+            renderAllPhases(); // UI beim Start aufbauen
         });
 
-        // --- Authentifizierung (VEREINFACHT FÜR SELF-HOSTING) ---
-        async function handleAuth(appId) {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    userId = user.uid;
-                } else {
-                    try {
-                        await signInAnonymously(auth);
-                        userId = auth.currentUser?.uid;
-                    } catch (error) {
-                        console.error("Authentifizierungsfehler:", error);
-                        console.error("--- WICHTIGER HINWEIS: HAST DU DEINE FIREBASE-KONFIGURATION OBEN (Zeile 314) EINGEFÜGT? ---");
-                        statusElement.textContent = "Auth-Fehler (API Key?)";
-                    }
-                }
-
-                if (userId) {
-                    statusElement.textContent = `Verbunden (ID: ${userId.substring(0, 6)}...)`;
-                    dbRef = doc(db, `artifacts/${appId}/users/${userId}/study-plan`, 'tasks');
-                    loadStateFromFirestore();
-                } else {
-                    console.error("Konnte keine User-ID erhalten.");
-                    statusElement.textContent = "Offline. Fortschritt wird nicht gespeichert.";
-                    // Offline arbeiten: Standard-Tasks trotzdem rendern
-                    renderAllPhases();
-                }
-            });
-        }
-
-        // --- NEU: Globale Event-Listener (Event Delegation) ---
+        // --- Globale Event-Listener (Event Delegation) ---
         function setupGlobalEventListeners() {
             // Für "Add Task" Buttons
             document.querySelectorAll('.add-task-btn').forEach(btn => {
@@ -370,17 +301,17 @@
             });
         }
 
-        // --- NEU: Alle Phasen auf der UI rendern ---
+        // --- Alle Phasen auf der UI rendern ---
         function renderAllPhases() {
             Object.keys(taskState).forEach(phase => {
                 renderPhase(phase);
             });
         }
 
-        // --- NEU: Eine einzelne Phase rendern ---
+        // --- Eine einzelne Phase rendern ---
         function renderPhase(phase) {
             const listElement = document.getElementById(`${phase}-tasks`);
-            if (!listElement) return; // Sicherheitshalber
+            if (!listElement) return; 
 
             listElement.innerHTML = ''; // Liste leeren
 
@@ -409,7 +340,7 @@
         }
 
 
-        // --- NEU: Logik-Funktionen ---
+        // --- Logik-Funktionen ---
         function addTask(phase, text) {
             const newTask = {
                 id: `task-${Date.now()}`, // Eindeutige ID
@@ -419,68 +350,63 @@
             };
             taskState[phase].push(newTask);
             renderPhase(phase); // UI aktualisieren
-            saveStateToFirestore(); // In DB speichern
+            saveStateToLocalStorage(); // Speichern
         }
 
         function toggleTask(phase, taskId, isChecked) {
             const task = taskState[phase].find(t => t.id === taskId);
             if (task) {
                 task.checked = isChecked;
-                saveStateToFirestore(); // In DB speichern
+                saveStateToLocalStorage(); // Speichern
             }
         }
 
         function deleteTask(phase, taskId) {
             taskState[phase] = taskState[phase].filter(t => t.id !== taskId);
             renderPhase(phase); // UI aktualisieren
-            saveStateToFirestore(); // In DB speichern
+            saveStateToLocalStorage(); // Speichern
         }
 
-        // --- Daten von Firestore laden ---
-        function loadStateFromFirestore() {
-            if (!dbRef) return;
-            statusElement.textContent = "Lade Daten...";
+        // --- Daten von localStorage laden ---
+        function loadStateFromLocalStorage() {
+            statusElement.textContent = "Lade...";
+            const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
             
-            onSnapshot(dbRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    // Wenn Daten in der DB existieren, überschreibe den Standard-State
-                    taskState = docSnap.data();
-                } else {
-                    // Beim allerersten Laden (oder nach DB-Reset)
-                    // taskState behält den vordefinierten Wert
-                    console.log("Keine DB-Daten. Verwende Standard-Tasks.");
-                    // Optional: Standard-Tasks direkt speichern, um DB zu initialisieren
-                    saveStateToFirestore();
-                }
-                renderAllPhases(); // UI mit geladenen oder Standard-Tasks aufbauen
-                statusElement.textContent = `Synchronisiert (ID: ${userId.substring(0, 6)}...)`;
-            }, (error) => {
-                console.error("Fehler beim Laden von Firestore:", error);
-                statusElement.textContent = "Sync-Fehler";
-                renderAllPhrases(); // UI trotzdem mit Standard-Tasks aufbauen
-            });
+            if (savedState) {
+                taskState = JSON.parse(savedState);
+                // Stelle sicher, dass alle Phasen-Arrays existieren, falls der gespeicherte
+                // Status alt ist und nicht alle Phasen (z.B. phase5) enthält
+                Object.keys(defaultTasks).forEach(phase => {
+                    if (!taskState[phase]) {
+                        taskState[phase] = defaultTasks[phase];
+                    }
+                });
+
+            } else {
+                // Beim allerersten Laden
+                taskState = defaultTasks;
+                console.log("Keine lokalen Daten. Verwende Standard-Tasks.");
+            }
+            statusElement.textContent = "Bereit";
         }
 
-        // --- Daten in Firestore speichern (mit Debounce) ---
-        function saveStateToFirestore() {
-            if (!userId || !dbRef) return; // Nicht speichern, wenn nicht verbunden
-
+        // --- Daten in localStorage speichern (mit Debounce) ---
+        function saveStateToLocalStorage() {
             clearTimeout(debounceTimer);
-            statusElement.textContent = "Änderungen erkannt...";
+            statusElement.textContent = "Speichere...";
             statusElement.classList.add('syncing');
             
-            debounceTimer = setTimeout(async () => {
+            debounceTimer = setTimeout(() => {
                 try {
-                    // Speichere das *gesamte* taskState-Objekt
-                    await setDoc(dbRef, taskState, { merge: false });
-                    statusElement.textContent = `Synchronisiert (ID: ${userId.substring(0, 6)}...)`;
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(taskState));
+                    statusElement.textContent = "Lokal gespeichert";
                 } catch (error) {
-                    console.error("Fehler beim Speichern in Firestore:", error);
+                    console.error("Fehler beim Speichern in localStorage:", error);
                     statusElement.textContent = "Speicherfehler!";
                 } finally {
                     statusElement.classList.remove('syncing');
                 }
-            }, 1500); // 1.5 Sekunden Verzögerung
+            }, 1000); // 1 Sekunde Verzögerung
         }
 
     </script>
