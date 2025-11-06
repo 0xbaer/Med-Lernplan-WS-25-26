@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Medi-Lernplan WS 25/26 (V17 - Ressourcen-Menü)</title>
+    <title>Mein Medi-Lernplan WS 25/26 (V18 - Endspurt-Integration)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -97,7 +97,8 @@
     <div id="menu-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden"></div>
 
     <!-- NEU V17: Ressourcen-Menü (Slide-Over) -->
-    <div id="resource-menu" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-40 p-6 menu-hidden">
+    <!-- HINWEIS V18: Links für Anatomie & Histo Skripte hinzugefügt -->
+    <div id="resource-menu" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-40 p-6 menu-hidden overflow-y-auto">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-900">Ressourcen</h2>
             <button id="close-menu-btn" class="text-gray-500 hover:text-gray-800">
@@ -110,16 +111,37 @@
         </p>
         
         <ul class="space-y-3">
+            <!-- Anatomie Skripte -->
+            <li>
+                <a href="#" target="_blank" class="flex items-center p-3 bg-red-50 rounded-lg hover:bg-red-100 text-red-700 font-medium">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13.5M8.25 6.253l-3 3m3-3l3 3M6.253 18v-3.375c0-1.02.84-1.875 1.875-1.875h7.75c1.035 0 1.875.855 1.875 1.875V18M17.75 6.253l-3 3m3-3l3 3"></path></svg>
+                    Anatomie 1: Allg./Extrem.
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank" class="flex items-center p-3 bg-red-50 rounded-lg hover:bg-red-100 text-red-700 font-medium">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 12.75l6 6 9-13.5"></path></svg>
+                    Anatomie 2: Eingeweide
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank" class="flex items-center p-3 bg-red-50 rounded-lg hover:bg-red-100 text-red-700 font-medium">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Anatomie 3: Kopf, Hals, ZNS
+                </a>
+            </li>
+            <!-- Histo Skript -->
+            <li>
+                <a href="#" target="_blank" class="flex items-center p-3 bg-purple-50 rounded-lg hover:bg-purple-100 text-purple-700 font-medium">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path></svg>
+                    Histologie Endspurt
+                </a>
+            </li>
+            <!-- Andere Dokumente -->
             <li>
                 <a href="#" target="_blank" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 text-blue-600 font-medium">
                     <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"></path></svg>
                     Stundenplan (Bild)
-                </a>
-            </li>
-            <li>
-                <a href="#" target="_blank" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 text-purple-600 font-medium">
-                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Histo II - Vorlesungsplan
                 </a>
             </li>
             <li>
@@ -155,8 +177,8 @@
         <header class="mb-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V17)</h1>
-                    <p class="text-lg text-gray-600">Geteilte Phasen mit individuellen Fortschrittsbalken.</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Dein Med-Lernplan WS 25/26 (V18)</h1>
+                    <p class="text-lg text-gray-600">Integriert mit Endspurt-Lerntagen.</p>
                 </div>
                 <div class="text-left md:text-right mt-4 md:mt-0 flex items-center">
                     <div class="mr-6">
@@ -447,13 +469,13 @@
         </div>
     </div>
 
-    <!-- Lokales Speicher-Skript (V17 - Ressourcen-Menü) -->
+    <!-- Lokales Speicher-Skript (V18 - Endspurt-Integration) -->
     <script type="module">
         
         // --- Globale Variablen ---
         let debounceTimer; // Für verzögertes Speichern
         const statusElement = document.getElementById('save-status');
-        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V17'; // Neuer Key für V17
+        const LOCAL_STORAGE_KEY = 'meinMedizinLernplan_V18'; // Neuer Key für V18
         const planContainer = document.getElementById('plan-container');
         const currentDateElement = document.getElementById('current-date');
         const globalProgressBar = document.getElementById('progress-bar');
@@ -480,82 +502,86 @@
             phase6: { startDate: new Date('2026-02-08'), endDate: new Date('2026-04-30T23:59:59') }
         };
 
-        // --- Standard-Datenstruktur (6-Phasen-Struktur) ---
+        // --- Standard-Datenstruktur (V18 - 6-Phasen-Struktur mit Endspurt-Tasks) ---
         const defaultData = {
-            phase1: {
+            phase1: { // Bis 07.11.
                 goals: [
                     { id: 'goal1-1', text: '<strong>Testat:</strong> Wöchentlicher Physio-Test (07.11.)', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' }
                 ],
                 tasks: [
-                    { id: 'task1-1', text: 'Thema "Blut I" (Zusammensetzung) lernen', checked: false, style: '' },
-                    { id: 'task1-2', text: 'Thema "Erythrozyten & Anämien" verstehen', checked: false, style: '' },
-                    { id: 'task1-3', text: 'Thema "Blutgruppen" wiederholen', checked: false, style: '' },
+                    { id: 'task1-1', text: 'Physio-Seminar WS 4: "Blut I" (Zusammensetzung) lernen', checked: false, style: '' },
+                    { id: 'task1-2', text: 'Physio-Seminar WS 4: "Erythrozyten & Anämien" verstehen', checked: false, style: '' },
+                    { id: 'task1-3', text: 'Physio-Seminar WS 4: "Blutgruppen" wiederholen', checked: false, style: '' },
                     { id: 'task1-4', text: 'AC-Selbststudium: PDF sichten & Lernplan-Blöcke verstehen', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task-histo-start', text: 'Histo-Notfallplan: VL-Unterlagen für Block 1-3 (Immunsys, GIT) sichten!', checked: false, style: 'font-semibold text-purple-700' }
+                    { id: 'task-histo-start', text: 'Histo-Notfallplan: Unterlagen sichten & Histo Skript "Lerntag 14: Zelle" beginnen', checked: false, style: 'font-semibold text-purple-700' }
                 ]
             },
             phase2: { // 08.11. - 01.12.
                 goals: [
                     { id: 'goal2-new-histo', text: '<strong>KLAUSUR: Histologie II (16.12.)</strong>', style: 'p-4 bg-purple-100 rounded-lg text-purple-900 border border-purple-300 font-bold' },
                     { id: 'goal2-5', text: '<strong>Klausur:</strong> Med. Psychologie (09.12.)', style: 'p-4 bg-yellow-50 rounded-lg text-yellow-800' },
-                    { id: 'goal2-1', text: '<strong>Ana-Block 1</strong> (Rumpf)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
+                    { id: 'goal2-1', text: '<strong>Ana 1:</strong> Lerntage 1-2 (Allg./Extrem.)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
                     { id: 'goal2-new-ac', text: '<strong>Dauerlauf AC-Selbststudium</strong>', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
                     { id: 'goal2-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' },
                     { id: 'goal2-4', text: '<strong>Physio-Ziel:</strong> 15 Pkt. aus 6 Tests (Schnitt: 2.5/6)', style: 'p-4 bg-blue-100 rounded-lg text-blue-900 border border-blue-300' },
                     { id: 'goal2-6', text: '<strong>Urlaub:</strong> 19.11. - 21.11. (Buenos Aires!)', style: 'p-4 bg-teal-50 rounded-lg text-teal-800' }
                 ],
                 tasks: [
-                    { id: 'task-histo-catchup-1', text: 'Histo CATCH-UP 1: Immunsystem & Lymph. Organe (VL 13.10-21.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
-                    { id: 'task-histo-4', text: 'Histo Block 4: Endokrinium (VL 11.11. - 13.11.)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-histo-14', text: 'Histo - Lerntag 14: Zelle', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task2-3', text: 'Physio Test (14.11.): Blut II (Hämostase, Immunologie)', checked: false, style: '' },
-                    { id: 'task-histo-catchup-2', text: 'Histo CATCH-UP 2: Zähne, Speicheldrüsen, Geschmack (VL 22.10-27.10)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
-                    { id: 'task2-1', text: 'Ana-Block 1: Rumpfwand & Rücken (bis ca. 22.11.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-histo-15', text: 'Histo - Lerntag 15: Gewebe', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
+                    { id: 'task-ana-1', text: 'Ana 1 - Lerntag 1: Allg. Ana/Embryo, Obere Extremität (Knochen, Gelenke)', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task-ac-1', text: 'AC-Block A: Grundlagen, Formeln, Säure/Base (pdf S. 1-3, 16-22, 44-46)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task-vacation', text: 'Blocker: URLAUB (19.11. - 21.11.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
-                    { id: 'task-histo-5-catchup', text: 'NACHHOLEN (nach 21.11.): Histo Block 5 (Weibl. Genitale)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task2-4', text: 'NACHHOLEN (nach 21.11.): Physio-Stoff "Energiehaushalt"', checked: false, style: '' },
+                    { id: 'task-histo-16', text: 'Histo - Lerntag 16: Nervengewebe, Herz-Kreislauf', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task2-6', text: 'Ab 25.11.: Intensiv-Lernphase Med. Psychologie starten', checked: false, style: 'font-bold text-yellow-800' },
-                    { id: 'task-histo-6', text: 'Histo Block 6: Männl. Genitale (VL 25.11. - 01.12.)', checked: false, style: 'font-semibold text-purple-700' },
-                    { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' }
+                    { id: 'task2-7', text: 'Physio Test (28.11.): Atmung I', checked: false, style: '' },
+                    { id: 'task-ana-2', text: 'Ana 1 - Lerntag 2: Obere Extremität (Muskeln, Leitungsbahnen, Topo)', checked: false, style: 'font-semibold text-red-700' }
                 ]
             },
             phase3: { // 02.12. - 20.12.
                 goals: [
                     { id: 'goal3-new-histo', text: '<strong>KLAUSUR: Histologie II (16.12.)</strong>', style: 'p-4 bg-purple-100 rounded-lg text-purple-900 border border-purple-300 font-bold' },
                     { id: 'goal3-5', text: '<strong>Klausur:</strong> Med. Psychologie (09.12.)', style: 'p-4 bg-yellow-100 rounded-lg text-yellow-900 border border-yellow-300 font-bold' },
-                    { id: 'goal3-1', text: '<strong>Ana-Blöcke 2 & 3</strong> (Arm, Bein)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
+                    { id: 'goal3-1', text: '<strong>Ana 1:</strong> Lerntage 3-4 (Untere Extrem., Rumpf)', style: 'p-4 bg-red-50 rounded-lg text-red-800 font-medium' },
                     { id: 'goal3-new-ac', text: '<strong>Dauerlauf AC-Selbststudium</strong>', style: 'p-4 bg-orange-50 rounded-lg text-orange-800 font-medium' },
                     { id: 'goal3-3', text: '<strong>Dauerlauf:</strong> Wöchentliche Physio-Tests', style: 'p-4 bg-blue-50 rounded-lg text-blue-800' }
                 ],
                 tasks: [
-                    { id: 'task-histo-7', text: 'Histo Block 7: Niere & Harnwege (VL 02.12. - 10.12.)', checked: false, style: 'font-semibold text-purple-700' },
+                    { id: 'task-histo-17', text: 'Histo - Lerntag 17: Lymph. Gewebe, Atmung', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task-ac-2', text: 'AC-Block B: Redox-Reaktionen & Nernst (pdf S. 1, 23-34)', checked: false, style: 'font-semibold text-orange-700' },
                     { id: 'task3-8', text: 'Physio Test (05.12.): Atmung II', checked: false, style: '' },
                     { id: 'task-psycho-final', text: 'FINALE LERNPHASE MED. PSYCHOLOGIE (06.12. - 08.12.)', checked: false, style: 'font-bold text-yellow-800 bg-yellow-50' },
-                    { id: 'task3-5', text: 'Ana-Block 2: Obere Extremität (bis ca. 06.12.)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task-histo-catchup-3', text: 'Histo CATCH-UP 3: GIT (Oesophagus, Magen, Darm, Leber, Pankreas)', checked: false, style: 'font-bold text-red-700 bg-red-50' },
-                    { id: 'task-histo-final', text: 'FINALE LERNPHASE HISTOLOGIE II (10.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
+                    { id: 'task-ana-3', text: 'Ana 1 - Lerntag 3: Untere Extremität (Knochen, Gelenke, Muskeln, Topo)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-histo-18', text: 'Histo - Lerntag 18: Verdauung, Harnsystem', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
                     { id: 'task3-9', text: 'Physio Test (12.12.): Niere I', checked: false, style: '' },
-                    { id: 'task3-10', text: 'Ana-Block 3: Untere Extremität (bis ca. 20.12.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-histo-19', text: 'Histo - Lerntag 19: Geschlechtsorgane, Haut, ZNS, Sinnesorg.', checked: false, style: 'font-bold text-purple-700 bg-purple-50' },
+                    { id: 'task-histo-final', text: 'FINALE LERNPHASE HISTOLOGIE (13.12. - 15.12.)', checked: false, style: 'font-bold text-purple-800 bg-purple-50' },
+                    { id: 'task-ana-4', text: 'Ana 1 - Lerntag 4: Rücken, Brust-, Bauchwand, Beckenboden', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task3-11', text: 'Physio Test (19.12.): Elektrolyt-/Säure-Basen', checked: false, style: '' }
                 ]
             },
             phase4: { // 21.12. - 20.01.
                 goals: [
                     { id: 'goal4-1', text: '<strong>WEIHNACHTSPAUSE:</strong> (21.12. - 26.12.)', style: 'p-4 bg-teal-50 rounded-lg text-teal-800 font-medium' },
-                    { id: 'goal4-2', text: '<strong>Ana-Blöcke 4-6</strong> (Organe, Kopf/Hals)', style: 'p-4 bg-red-50 rounded-lg text-red-800' },
-                    { id: 'goal4-3', text: '<strong>Start Biochemie Praktikum:</strong> 07.01.2026', style: 'p-4 bg-green-50 rounded-lg text-green-800 font-medium' },
-                    { id: 'goal4-4', text: '<strong>FINALE: Ganzkörpertestat:</strong> 20.01.2026', style: 'p-4 bg-red-100 rounded-lg text-red-900 font-medium border border-red-300' }
+                    { id: 'goal4-2', text: '<strong>Ana 2:</strong> Pakete 5-8 (Eingeweide)', style: 'p-4 bg-red-50 rounded-lg text-red-800' },
+                    { id: 'goal4-3', text: '<strong>Ana 3:</strong> Pakete 9-12 (Kopf, Hals, ZNS)', style: 'p-4 bg-red-50 rounded-lg text-red-800' },
+                    { id: 'goal4-4', text: '<strong>Start Biochemie Praktikum:</strong> 07.01.2026', style: 'p-4 bg-green-50 rounded-lg text-green-800 font-medium' },
+                    { id: 'goal4-5', text: '<strong>FINALE: Ganzkörpertestat:</strong> 20.01.2026', style: 'p-4 bg-red-100 rounded-lg text-red-900 font-medium border border-red-300' }
                 ],
                 tasks: [
                     { id: 'task-xmas', text: 'Blocker: WEIHNACHTSPAUSE (21.12. - 26.12.)', checked: true, disabled: true, style: 'text-teal-700 font-medium' },
-                    { id: 'task4-1', text: 'Ana-Block 4: Brustorgane (27.12. - 05.01.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ana-5', text: 'Ana 2 - Lernpaket 5: Brustsitus (Herz, Lunge, Ösophagus)', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task-ac-3', text: 'AC-Block C: Thermodynamik & Kinetik (pdf S. 2, 3, 11-15)', checked: false, style: 'font-semibold text-orange-700' },
+                    { id: 'task-ana-6', text: 'Ana 2 - Lernpaket 6: Bauchsitus (Magen, Darm, Leber, Pankreas)', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task4-2', text: 'Vor 07.01.: Überblick Biochemie-Praktikumsthemen', checked: false, style: '' },
                     { id: 'task4-3', text: 'Praktikum (ab 07.01.) täglich vor/nachbereiten', checked: false, style: '' },
-                    { id: 'task4-4', text: 'Ana-Block 5: Bauch- & Beckenorgane (06.01. - 12.01.)', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ana-7', text: 'Ana 2 - Lernpaket 7 & 8: Beckensitus, Geschlechtsorgane, Leitungsbahnen', checked: false, style: 'font-semibold text-red-700' },
                     { id: 'task-ac-4', text: 'AC-Block D: Atomtheorie, PSE, Trends (pdf S. 4-6)', checked: false, style: 'font-semibold text-orange-700' },
-                    { id: 'task4-5', text: 'Ana-Block 6: Kopf & Hals (13.01. - 18.01.)', checked: false, style: 'font-semibold text-red-700' },
-                    { id: 'task4-6', text: 'Ana-Block 7: Puffer & Finale Repetition (19.01. - 20.01.)', checked: false, style: 'font-bold text-red-900' }
+                    { id: 'task-ana-9', text: 'Ana 3 - Lernpaket 9 & 10: Kopf & Hals', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ana-11', text: 'Ana 3 - Lernpaket 11 & 12: ZNS, Sinnesorgane', checked: false, style: 'font-semibold text-red-700' },
+                    { id: 'task-ana-final', text: 'Ana-Block 7: Puffer & Finale Repetition (Ana 1, 2, 3)', checked: false, style: 'font-bold text-red-900' }
                 ]
             },
             phase5: { // 21.01. - 07.02.
@@ -599,7 +625,7 @@
             // Aktuelles Datum anzeigen
             currentDateElement.textContent = `Heute: ${now.toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
             
-            setupMenuListeners(); // NEU V17
+            setupMenuListeners(); // V17
             loadStateFromLocalStorage();
             setupGlobalEventListeners();
             renderAllPhases();
@@ -608,7 +634,7 @@
             updateAllPhaseProgressBars(); // Alle Phasen-Balken
         });
         
-        // --- NEU V17: Menü-Funktionen ---
+        // --- V17: Menü-Funktionen ---
         function setupMenuListeners() {
             openBtn.addEventListener('click', () => {
                 menu.classList.remove('menu-hidden');
@@ -840,7 +866,7 @@
                 try {
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataState));
                     statusElement.textContent = "Lokal gespeichert";
-                    // UI-Updates nach dem Speichern (NEUE REIHENFOLGE)
+                    // UI-Updates nach dem Speichern
                     updateOverallProgress(); // Gesamt-Balken
                     highlightPhaseStatus(); // Phasen-Status (Farben)
                     updateAllPhaseProgressBars(); // Alle Phasen-Balken (liest Phasen-Status)
